@@ -1,12 +1,13 @@
 /* ========================================================================
    AROMA LOUNGE — Menu page logic
-   Renders menu, handles product drawer + cart drawer + add-to-bag
+   Instant-add: one click adds to bag with defaults and reveals inline
+   customization chips. No modal, no extra clicks.
    ======================================================================== */
 
 (() => {
   'use strict';
 
-  const TAX_RATE = 0.07; // IN sales tax (Allen County ~7%)
+  const TAX_RATE = 0.07;
   const CART_KEY = 'aroma_cart';
 
   /* ---------- Render category nav ---------- */
@@ -49,40 +50,50 @@
     const grid = sec.querySelector('.menu-grid');
 
     items.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'menu-item';
-      if (item.img) div.classList.add('has-img');
-      div.id = item.id;
-      div.dataset.id = item.id;
+      // Wrap row + inline panel into a single .menu-row container
+      const row = document.createElement('div');
+      row.className = 'menu-row' + (item.img ? ' has-img' : '');
+      row.id = item.id;
+      row.dataset.id = item.id;
 
       const imgPart = item.img
-        ? `<div class="menu-item-img"><img src="assets/img/${item.img}.jpg" alt="${item.name}" loading="lazy" onerror="this.style.display='none'" /></div>`
+        ? `<div class="menu-item-img"><img src="assets/img/${item.img}.jpg" alt="${item.name}" loading="lazy" onerror="this.parentElement.style.display='none'" /></div>`
         : '';
 
-      div.innerHTML = `
-        ${imgPart}
-        <div class="menu-item-main">
-          <div class="menu-item-name">
-            ${item.popular ? '<span class="pop-dot" title="Most loved"></span>' : ''}
-            <span>${item.name}</span>
-            ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
+      row.innerHTML = `
+        <div class="menu-item ${item.img ? 'has-img' : ''}">
+          ${imgPart}
+          <div class="menu-item-main">
+            <div class="menu-item-name">
+              ${item.popular ? '<span class="pop-dot" title="Most loved"></span>' : ''}
+              <span>${item.name}</span>
+              ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
+            </div>
+            <div class="menu-item-desc">${item.desc}</div>
+            ${item.calories ? `<div class="menu-item-cal">${item.calories} cal</div>` : ''}
           </div>
-          <div class="menu-item-desc">${item.desc}</div>
-          ${item.calories ? `<div class="menu-item-cal">${item.calories} cal</div>` : ''}
+          <div class="menu-item-side">
+            <div class="menu-item-price">$${item.price.toFixed(2)}</div>
+            <div class="menu-item-arr">Add ›</div>
+          </div>
         </div>
-        <div class="menu-item-side">
-          <div class="menu-item-price">$${item.price.toFixed(2)}</div>
-          <div class="menu-item-arr">Add →</div>
-        </div>
+        <div class="inline-panel"><div class="inner"></div></div>
       `;
-      div.addEventListener('click', () => openProductDrawer(item));
-      grid.appendChild(div);
+
+      const rowMain = row.querySelector('.menu-item');
+      rowMain.addEventListener('click', e => {
+        // Don't re-add if a chip / nested control is clicked
+        if (e.target.closest('.chip, .mini-qty, .done, .add-another, button')) return;
+        handleRowTap(row, item);
+      });
+
+      grid.appendChild(row);
     });
 
     menuRoot.appendChild(sec);
   });
 
-  /* ---------- Category active scroll spy ---------- */
+  /* ---------- Category scroll spy ---------- */
   const catSections = document.querySelectorAll('.cat-section');
   const catPills = document.querySelectorAll('.cat-pill');
   const spyObs = new IntersectionObserver(entries => {
@@ -90,59 +101,39 @@
       if (e.isIntersecting) {
         const id = e.target.id.replace('cat-', '');
         catPills.forEach(p => p.classList.toggle('active', p.dataset.cat === id));
-        // Auto-scroll the cat nav to keep active pill visible
         const active = document.querySelector('.cat-pill.active');
-        if (active) {
-          active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
+        if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
     });
   }, { rootMargin: '-140px 0px -60% 0px' });
   catSections.forEach(s => spyObs.observe(s));
 
   /* ========================================================================
-     PRODUCT DRAWER (customize + add to cart)
+     STATE
      ======================================================================== */
 
-  const drawer = document.querySelector('#prod-drawer');
-  const drawerBody = drawer.querySelector('.drawer-body');
-  const drawerMask = document.querySelector('#drawer-mask');
-  const drawerFoot = drawer.querySelector('.drawer-foot');
-  let currentProduct = null;
-  let currentSelections = {};
-  let currentQty = 1;
+  let currentRow = null;           // expanded row element
+  let currentItem = null;          // menu item definition
+  let currentCartIndex = -1;       // index of the just-added cart line being edited
 
-  function openProductDrawer(item) {
-    currentProduct = item;
-    currentSelections = {};
-    currentQty = 1;
-    // Initialize default selections
+  function defaultSelections(item) {
+    const sel = {};
     (item.customizations || []).forEach(g => {
       if (g.type === 'single') {
         const def = g.options.find(o => o.default);
-        if (def) currentSelections[g.id] = def.id;
-        else if (g.required) currentSelections[g.id] = g.options[0].id;
+        if (def) sel[g.id] = def.id;
+        else if (g.required) sel[g.id] = g.options[0].id;
       } else {
-        currentSelections[g.id] = [];
+        sel[g.id] = [];
       }
     });
-    renderDrawer();
-    drawer.classList.add('open');
-    drawerMask.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    return sel;
   }
 
-  function closeProductDrawer() {
-    drawer.classList.remove('open');
-    drawerMask.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function calcCurrentTotal() {
-    if (!currentProduct) return 0;
-    let total = currentProduct.price;
-    (currentProduct.customizations || []).forEach(g => {
-      const sel = currentSelections[g.id];
+  function priceFor(item, selections, qty = 1) {
+    let total = item.price;
+    (item.customizations || []).forEach(g => {
+      const sel = selections[g.id];
       if (!sel) return;
       if (g.type === 'single') {
         const o = g.options.find(o => o.id === sel);
@@ -154,131 +145,231 @@
         });
       }
     });
-    return total * currentQty;
+    return total * qty;
   }
 
-  function renderDrawer() {
-    const p = currentProduct;
-    const imgHtml = p.img
-      ? `<div class="prod-hero"><img src="assets/img/${p.img}.jpg" alt="${p.name}" /></div>`
-      : '';
+  /* ========================================================================
+     Tap row → add + expand
+     ======================================================================== */
 
-    let html = `
-      ${imgHtml}
-      <h2 class="prod-title">${p.name}</h2>
-      <div class="prod-desc">${p.desc}</div>
-      <div class="prod-base-price">Base $${p.price.toFixed(2)} · ${p.calories || 0} cal</div>
-    `;
+  function handleRowTap(row, item) {
+    // If this row is already expanded → close it (toggle behavior)
+    if (currentRow === row) {
+      collapseCurrent();
+      return;
+    }
+    // Close any other expanded row first
+    if (currentRow) collapseCurrent();
 
-    (p.customizations || []).forEach(g => {
-      const isMulti = g.type === 'multi';
-      const sel = currentSelections[g.id];
+    // Add a line item to the cart with defaults
+    const selections = defaultSelections(item);
+    const unit = priceFor(item, selections, 1);
+    const sig = item.id + '::' + JSON.stringify(selections);
+    const cart = getCart();
+    cart.push({
+      id: item.id,
+      name: item.name,
+      sig,
+      selections,
+      unit,
+      qty: 1,
+      img: item.img,
+    });
+    saveCart(cart);
+    currentCartIndex = cart.length - 1;
+    currentItem = item;
+    currentRow = row;
 
-      html += `<div class="opt-group">
-        <div class="opt-group-head">
-          <div class="opt-group-name">
-            ${g.name}${g.required ? '<span class="req">Required</span>' : ''}
-          </div>
-          ${isMulti ? '<div class="opt-group-hint">Pick any</div>' : (g.required ? '' : '<div class="opt-group-hint">Optional</div>')}
-        </div>`;
+    // Expand inline panel
+    row.classList.add('expanded');
+    row.querySelector('.inline-panel .inner').innerHTML = inlineHTML(item, selections, 1);
+    bindInlineControls(row);
 
-      if (g.upsell) {
-        html += `<div class="upsell-banner">
-          <span class="label">+ Add</span>
-          <span class="text">Most guests add a house syrup — try Rose or Cardamom.</span>
-        </div>`;
+    // Confirmation flash near the price
+    flashAdded(row);
+    showToast(`${item.name} · added`);
+    renderCart();
+
+    // Smooth scroll to keep panel in view
+    setTimeout(() => {
+      const rect = row.getBoundingClientRect();
+      if (rect.bottom > window.innerHeight - 80) {
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+    }, 250);
+  }
 
-      html += '<div class="opt-grid">';
-      g.options.forEach(o => {
+  function flashAdded(row) {
+    const side = row.querySelector('.menu-item-side');
+    const arrow = side.querySelector('.menu-item-arr');
+    arrow.innerHTML = '<span class="added-pill">In Bag</span>';
+  }
+
+  function collapseCurrent() {
+    if (!currentRow) return;
+    currentRow.classList.remove('expanded');
+    const arrow = currentRow.querySelector('.menu-item-arr');
+    if (arrow) arrow.textContent = 'Add ›';
+    // Clear inner after slide-down finishes (also avoids re-renders flashing)
+    const inner = currentRow.querySelector('.inline-panel .inner');
+    setTimeout(() => { if (inner) inner.innerHTML = ''; }, 450);
+    currentRow = null;
+    currentItem = null;
+    currentCartIndex = -1;
+  }
+
+  /* ========================================================================
+     Inline customize HTML + interactions
+     ======================================================================== */
+
+  function inlineHTML(item, selections, qty) {
+    // Compose chip rows for each customization group
+    let rows = '';
+    let hasUpsell = false;
+    (item.customizations || []).forEach(g => {
+      const isMulti = g.type === 'multi';
+      const sel = selections[g.id];
+      if (g.upsell && !hasUpsell) hasUpsell = true;
+
+      const chips = g.options.map(o => {
         const selected = isMulti ? (sel || []).includes(o.id) : sel === o.id;
         const delta = o.delta || 0;
-        const deltaHtml = delta === 0 ? '' : (delta > 0 ? `<span class="opt-delta positive">+$${delta.toFixed(2)}</span>` : `<span class="opt-delta">−$${Math.abs(delta).toFixed(2)}</span>`);
-        const badgeHtml = o.badge ? `<span class="badge">${o.badge}</span>` : '';
-
-        html += `<button class="opt ${selected ? 'selected' : ''}" data-group="${g.id}" data-opt="${o.id}" data-multi="${isMulti}">
-          <span class="opt-name">${o.name} ${badgeHtml}</span>
-          ${deltaHtml}
+        const dTxt = delta === 0 ? '' : (delta > 0 ? `<span class="delta">+$${delta.toFixed(2)}</span>` : `<span class="delta">−$${Math.abs(delta).toFixed(2)}</span>`);
+        const badge = o.badge ? `<span class="b">${o.badge}</span>` : '';
+        return `<button class="chip ${selected ? 'on' : ''}" data-group="${g.id}" data-opt="${o.id}" data-multi="${isMulti}">
+          <span>${o.name}</span>${badge}${dTxt}
         </button>`;
-      });
-      html += '</div></div>';
+      }).join('');
+
+      rows += `<div class="inline-row">
+        <div class="label">${g.name}</div>
+        <div class="chips">${chips}</div>
+      </div>`;
     });
 
-    drawerBody.innerHTML = html;
+    const running = priceFor(item, selections, qty);
+    const upsellNote = item.customizations?.some(g => g.upsell)
+      ? `<div class="inline-upsell"><strong>Upgrade:</strong>add a house syrup — Rose, Cardamom, or Pistachio go beautifully with this drink.</div>`
+      : '';
 
-    // Bind option clicks
-    drawerBody.querySelectorAll('.opt').forEach(btn => {
-      btn.addEventListener('click', () => {
+    return `
+      ${upsellNote}
+      ${rows}
+      <div class="inline-foot">
+        <div class="left">
+          <div class="running">Running <span class="v">$${running.toFixed(2)}</span></div>
+          <div class="mini-qty">
+            <button data-qty="-1" aria-label="Decrease">−</button>
+            <span class="val">${qty}</span>
+            <button data-qty="+1" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="add-another" data-add-another>+ Add Another</button>
+          <button class="done" data-done>Done</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function bindInlineControls(row) {
+    const inner = row.querySelector('.inline-panel .inner');
+
+    inner.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
         const gId = btn.dataset.group;
         const oId = btn.dataset.opt;
         const isMulti = btn.dataset.multi === 'true';
+        const cart = getCart();
+        const line = cart[currentCartIndex];
+        if (!line) return;
+
         if (isMulti) {
-          const arr = currentSelections[gId] || [];
-          if (arr.includes(oId)) currentSelections[gId] = arr.filter(x => x !== oId);
-          else currentSelections[gId] = [...arr, oId];
+          const arr = line.selections[gId] || [];
+          line.selections[gId] = arr.includes(oId) ? arr.filter(x => x !== oId) : [...arr, oId];
         } else {
-          currentSelections[gId] = oId;
+          line.selections[gId] = oId;
         }
-        renderDrawer();
+        line.unit = priceFor(currentItem, line.selections, 1);
+        line.sig = currentItem.id + '::' + JSON.stringify(line.selections);
+        saveCart(cart);
+
+        // Re-render the panel in place (preserve scroll)
+        inner.innerHTML = inlineHTML(currentItem, line.selections, line.qty);
+        bindInlineControls(row);
+        renderCart();
       });
     });
 
-    // Footer (qty + add)
-    drawerFoot.innerHTML = `
-      <div class="qty">
-        <button id="qty-minus" aria-label="Decrease">−</button>
-        <input id="qty-input" type="text" value="${currentQty}" readonly />
-        <button id="qty-plus" aria-label="Increase">+</button>
-      </div>
-      <button class="drawer-add" id="add-btn">
-        <span>Add to Bag</span>
-        <span class="price">$${calcCurrentTotal().toFixed(2)}</span>
-      </button>
-    `;
-    drawerFoot.querySelector('#qty-minus').addEventListener('click', () => { if (currentQty > 1) { currentQty--; renderDrawer(); } });
-    drawerFoot.querySelector('#qty-plus').addEventListener('click', () => { currentQty++; renderDrawer(); });
-    drawerFoot.querySelector('#add-btn').addEventListener('click', addCurrentToCart);
+    inner.querySelectorAll('[data-qty]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const delta = +btn.dataset.qty;
+        const cart = getCart();
+        const line = cart[currentCartIndex];
+        if (!line) return;
+        line.qty = Math.max(1, line.qty + delta);
+        saveCart(cart);
+        inner.querySelector('.mini-qty .val').textContent = line.qty;
+        inner.querySelector('.running .v').textContent = '$' + (line.unit * line.qty).toFixed(2);
+        renderCart();
+      });
+    });
+
+    inner.querySelector('[data-done]')?.addEventListener('click', e => {
+      e.stopPropagation();
+      collapseCurrent();
+    });
+
+    inner.querySelector('[data-add-another]')?.addEventListener('click', e => {
+      e.stopPropagation();
+      // Duplicate the current line with same selections
+      const cart = getCart();
+      const line = cart[currentCartIndex];
+      if (!line) return;
+      cart.push({ ...line, selections: { ...line.selections }, qty: 1 });
+      saveCart(cart);
+      currentCartIndex = cart.length - 1;
+      inner.querySelector('.mini-qty .val').textContent = 1;
+      inner.querySelector('.running .v').textContent = '$' + line.unit.toFixed(2);
+      showToast(`Another ${currentItem.name} added`);
+      renderCart();
+    });
   }
 
-  document.querySelector('#prod-drawer-close').addEventListener('click', closeProductDrawer);
-  drawerMask.addEventListener('click', closeProductDrawer);
+  /* Collapse when clicking outside */
+  document.addEventListener('click', e => {
+    if (!currentRow) return;
+    if (currentRow.contains(e.target)) return;
+    // Ignore clicks on cart fab, toast, cart drawer, nav
+    if (e.target.closest('#cart-fab, #cart-drawer, #drawer-mask, .nav, .cat-nav, #toast')) return;
+    collapseCurrent();
+  });
+
+  /* Esc closes expanded row + cart drawer */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      collapseCurrent();
+      closeCartDrawer();
+    }
+  });
 
   /* ========================================================================
-     CART STATE
+     CART STATE + DRAWER (the side bag remains for review only)
      ======================================================================== */
 
   function getCart() { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
-  function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); window.dispatchEvent(new Event('aroma:cart-updated')); }
-
-  function addCurrentToCart() {
-    const p = currentProduct;
-    const sel = { ...currentSelections };
-    const total = calcCurrentTotal() / currentQty;
-    const cart = getCart();
-
-    // Try merge if exact same product + selections exist
-    const sig = p.id + '::' + JSON.stringify(sel);
-    const existing = cart.find(i => i.sig === sig);
-    if (existing) existing.qty += currentQty;
-    else cart.push({
-      id: p.id, name: p.name, sig,
-      selections: sel,
-      unit: total, qty: currentQty, img: p.img,
-    });
-    saveCart(cart);
-    closeProductDrawer();
-    showToast(`${p.name} · added to bag`);
-    renderCart();
+  function saveCart(c) {
+    localStorage.setItem(CART_KEY, JSON.stringify(c));
+    window.dispatchEvent(new Event('aroma:cart-updated'));
   }
-
-  /* ========================================================================
-     CART DRAWER
-     ======================================================================== */
 
   const cartDrawer = document.querySelector('#cart-drawer');
   const cartBody = cartDrawer.querySelector('.drawer-body');
   const cartSummaryEl = document.querySelector('#cart-summary');
   const cartFab = document.querySelector('#cart-fab');
+  const drawerMask = document.querySelector('#drawer-mask');
 
   function describeSelections(item) {
     const product = AROMA_MENU.find(m => m.id === item.id);
@@ -319,7 +410,7 @@
       <div class="cart-item">
         <div>
           <h4>${i.name}</h4>
-          <div class="opts">${describeSelections(i)}</div>
+          <div class="opts">${describeSelections(i) || 'Standard'}</div>
           <div class="row">
             <div class="qty">
               <button data-cart-minus="${idx}">−</button>
@@ -347,6 +438,7 @@
       const idx = +e.target.dataset.cartRemove;
       const c = getCart();
       c.splice(idx, 1); saveCart(c); renderCart();
+      if (idx === currentCartIndex) collapseCurrent();
     }));
 
     const sub = cart.reduce((s, i) => s + i.unit * i.qty, 0);
@@ -363,7 +455,6 @@
     `;
     cartSummaryEl.querySelector('#keep-shopping').addEventListener('click', closeCartDrawer);
 
-    // FAB
     const count = cart.reduce((s, i) => s + i.qty, 0);
     cartFab.classList.add('visible');
     cartFab.querySelector('.count').textContent = count;
@@ -378,26 +469,13 @@
   }
   function closeCartDrawer() {
     cartDrawer.classList.remove('open');
-    if (!drawer.classList.contains('open')) drawerMask.classList.remove('open');
+    drawerMask.classList.remove('open');
     document.body.style.overflow = '';
   }
   cartFab.addEventListener('click', openCartDrawer);
   document.querySelector('#cart-drawer-close').addEventListener('click', closeCartDrawer);
   document.querySelector('#cart-open-nav').addEventListener('click', e => { e.preventDefault(); openCartDrawer(); });
-
-  // Mask closes both
-  drawerMask.addEventListener('click', () => {
-    closeProductDrawer();
-    closeCartDrawer();
-  });
-
-  // Esc closes
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      closeProductDrawer();
-      closeCartDrawer();
-    }
-  });
+  drawerMask.addEventListener('click', closeCartDrawer);
 
   /* ========================================================================
      TOAST
@@ -409,16 +487,10 @@
     toast.querySelector('.text').innerHTML = `<strong>Added</strong>${text}`;
     toast.classList.add('visible');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('visible'), 2600);
+    toastTimer = setTimeout(() => toast.classList.remove('visible'), 2400);
   }
 
   /* Initial render */
   renderCart();
-
-  /* If URL has hash matching a product, open its drawer */
-  if (location.hash) {
-    const item = AROMA_MENU.find(i => '#' + i.id === location.hash);
-    if (item) setTimeout(() => openProductDrawer(item), 300);
-  }
 
 })();
