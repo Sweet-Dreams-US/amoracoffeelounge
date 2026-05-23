@@ -2,11 +2,16 @@
    AROMA LOUNGE — Menu page styles
    ======================================================================== */
 
-.menu-page { padding-top: 120px; padding-bottom: 80px; }
+.menu-page { padding-top: 104px; padding-bottom: 120px; }
+@media (max-width: 700px) { .menu-page { padding-top: 88px; padding-bottom: 140px; } }
 
-.menu-header { text-align: center; max-width: 800px; margin: 0 auto 64px; }
-.menu-header h1 { margin: 16px 0 24px; }
-.menu-header p { font-family: var(--font-display); font-style: italic; font-size: 22px; color: var(--linen); }
+.menu-header { text-align: center; max-width: 800px; margin: 0 auto 56px; }
+.menu-header h1 { margin: 16px 0 16px; }
+.menu-header p { font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--linen); }
+@media (max-width: 700px) {
+  .menu-header { margin-bottom: 32px; }
+  .menu-header p { font-size: 16px; line-height: 1.4; }
+}
 
 /* Category nav (sticky) */
 .cat-nav {
@@ -17,8 +22,11 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-block: 1px solid var(--line-soft);
-  margin-bottom: 64px;
+  margin-bottom: 48px;
   padding-block: var(--s-3);
+}
+@media (max-width: 700px) {
+  .cat-nav { top: 56px; margin-bottom: 24px; padding-block: 10px; }
 }
 .cat-nav-track {
   display: flex;
@@ -59,14 +67,17 @@
 .cat-pill .icon { font-size: 14px; }
 
 /* Category sections */
-.cat-section { padding-block: var(--s-6) var(--s-7); scroll-margin-top: 140px; }
+.cat-section { padding-block: var(--s-5) var(--s-6); scroll-margin-top: 140px; }
 .cat-section + .cat-section { border-top: 1px solid var(--line-soft); }
+@media (max-width: 700px) {
+  .cat-section { padding-block: var(--s-4) var(--s-5); scroll-margin-top: 120px; }
+}
 
 .cat-head {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  margin-bottom: var(--s-6);
+  margin-bottom: var(--s-5);
   gap: var(--s-4);
   flex-wrap: wrap;
 }
@@ -74,7 +85,7 @@
   font-family: var(--font-display);
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: clamp(32px, 5vw, 56px);
   color: var(--cream);
   line-height: 1.05;
 }
@@ -82,20 +93,24 @@
   font-family: var(--font-display);
   font-style: italic;
   color: var(--bronze);
-  font-size: 18px;
+  font-size: 16px;
   text-align: right;
   flex: 1;
   max-width: 360px;
+}
+@media (max-width: 700px) {
+  .cat-head { margin-bottom: var(--s-3); align-items: baseline; }
+  .cat-head .blurb { display: none; }
 }
 
 /* Menu items grid */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--s-4) var(--s-6);
+  gap: 0 var(--s-6);
 }
 @media (max-width: 800px) {
-  .menu-grid { grid-template-columns: 1fr; }
+  .menu-grid { grid-template-columns: 1fr; gap: 0; }
 }
 
 .menu-item {
@@ -105,26 +120,26 @@
   padding: var(--s-4) 0;
   border-bottom: 1px solid var(--line-soft);
   cursor: pointer;
-  transition: padding 0.4s var(--ease-out);
+  transition: padding 0.3s var(--ease-out);
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
-.menu-item:hover {
-  padding-inline: var(--s-3);
-}
-.menu-item:hover .menu-item-name { color: var(--bronze-soft); }
-.menu-item:hover .menu-item-arr { opacity: 1; transform: translateX(0); }
+.menu-item:active { background: rgba(180, 138, 75, 0.06); }
 
 .menu-item-name {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 22px;
   color: var(--cream);
   transition: color 0.3s var(--ease-out);
   display: flex;
   align-items: center;
   gap: var(--s-2);
+  flex-wrap: wrap;
+  line-height: 1.15;
 }
+@media (max-width: 700px) { .menu-item-name { font-size: 19px; } }
 .menu-item-name .pop-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
@@ -158,41 +173,93 @@
   margin-top: 4px;
 }
 .menu-item-side {
-  text-align: right;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px;
-  min-width: 90px;
+  gap: 10px;
+  min-width: 56px;
 }
 .menu-item-price {
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 15px;
   color: var(--bronze);
   letter-spacing: 0.04em;
-}
-.menu-item-arr {
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--bronze);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: all 0.3s var(--ease-out);
+  white-space: nowrap;
 }
 
+/* Always-visible circular add button — primary affordance on mobile */
+.add-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bronze);
+  border: 1.5px solid var(--bronze);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+.add-btn:active { transform: scale(0.92); }
+.add-btn:hover { background: var(--bronze); color: var(--ink); }
+.add-btn .ic { display: inline-block; transition: transform 0.3s var(--ease-out); }
+
+.add-btn.in-bag {
+  background: var(--bronze);
+  color: var(--ink);
+  border-color: var(--bronze);
+}
+.add-btn.in-bag .ic { transform: rotate(45deg); }
+.add-btn.in-bag::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -4px; right: -4px;
+  background: var(--ink);
+  color: var(--bronze);
+  border: 1.5px solid var(--bronze);
+  border-radius: 999px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+@keyframes addBump {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+.add-btn.just-added { animation: addBump 0.5s var(--ease-out); }
+
 .menu-item.has-img {
-  grid-template-columns: 88px 1fr auto;
-  gap: var(--s-4);
+  grid-template-columns: 84px 1fr auto;
+  gap: var(--s-3);
 }
 .menu-item.has-img .menu-item-img {
-  width: 88px; height: 88px;
+  width: 84px; height: 84px;
   border-radius: var(--r-md);
   overflow: hidden;
   background: var(--espresso);
   flex-shrink: 0;
 }
 .menu-item.has-img .menu-item-img img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 700px) {
+  .menu-item.has-img { grid-template-columns: 64px 1fr auto; }
+  .menu-item.has-img .menu-item-img { width: 64px; height: 64px; }
+}
 
 /* ========================================================================
    Inline added state + inline customization panel
@@ -208,38 +275,9 @@
 }
 .menu-row.expanded .menu-item { border-bottom: 0; padding-inline: var(--s-3); }
 
-.menu-row .menu-item-arr { transition: all 0.3s var(--ease-out); }
-.menu-row.expanded .menu-item-arr {
-  opacity: 1;
-  transform: rotate(90deg);
-  color: var(--bronze);
-}
 .menu-row.expanded .menu-item-name { color: var(--bronze-soft); }
 
-/* "Just added" flash pill */
-.added-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(180, 138, 75, 0.16);
-  border: 1px solid var(--bronze);
-  color: var(--bronze);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 4px 9px;
-  border-radius: 999px;
-  animation: addedIn 0.5s var(--ease-out);
-}
-.added-pill::before {
-  content: "✓";
-  font-size: 11px;
-}
-@keyframes addedIn {
-  from { transform: scale(0.7); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
+.menu-row.expanded .menu-item { padding-inline: var(--s-3); }
 
 /* Inline customize panel */
 .inline-panel {
@@ -283,11 +321,11 @@
   gap: 6px;
 }
 .chip {
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 9px 14px;
+  font-size: 13px;
   background: rgba(255,255,255,0.02);
   border: 1px solid var(--line-soft);
-  color: rgba(244, 236, 219, 0.7);
+  color: rgba(244, 236, 219, 0.78);
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s var(--ease-out);
@@ -295,6 +333,12 @@
   align-items: center;
   gap: 6px;
   white-space: nowrap;
+  min-height: 38px;
+  -webkit-tap-highlight-color: transparent;
+}
+.chip:active { transform: scale(0.96); }
+@media (max-width: 700px) {
+  .chip { padding: 10px 14px; font-size: 13px; min-height: 40px; }
 }
 .chip:hover {
   border-color: var(--bronze);

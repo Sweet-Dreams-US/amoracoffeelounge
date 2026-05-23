@@ -74,16 +74,25 @@
           </div>
           <div class="menu-item-side">
             <div class="menu-item-price">$${item.price.toFixed(2)}</div>
-            <div class="menu-item-arr">Add ›</div>
+            <button class="add-btn" aria-label="Add ${item.name} to bag" data-add-btn>
+              <span class="ic">+</span>
+            </button>
           </div>
         </div>
         <div class="inline-panel"><div class="inner"></div></div>
       `;
 
       const rowMain = row.querySelector('.menu-item');
+      const addBtn = row.querySelector('[data-add-btn]');
+
+      // Tap anywhere on the row (excluding inline controls) → same behavior as + tap
       rowMain.addEventListener('click', e => {
-        // Don't re-add if a chip / nested control is clicked
         if (e.target.closest('.chip, .mini-qty, .done, .add-another, button')) return;
+        handleRowTap(row, item);
+      });
+      // Explicit + tap (also stops the row click from duplicating work)
+      addBtn.addEventListener('click', e => {
+        e.stopPropagation();
         handleRowTap(row, item);
       });
 
@@ -185,8 +194,9 @@
     row.querySelector('.inline-panel .inner').innerHTML = inlineHTML(item, selections, 1);
     bindInlineControls(row);
 
-    // Confirmation flash near the price
+    // Pulse the + button + sync count badge
     flashAdded(row);
+    syncAddButtons();
     showToast(`${item.name} · added`);
     renderCart();
 
@@ -200,22 +210,41 @@
   }
 
   function flashAdded(row) {
-    const side = row.querySelector('.menu-item-side');
-    const arrow = side.querySelector('.menu-item-arr');
-    arrow.innerHTML = '<span class="added-pill">In Bag</span>';
+    const btn = row.querySelector('[data-add-btn]');
+    if (!btn) return;
+    btn.classList.add('just-added');
+    setTimeout(() => btn.classList.remove('just-added'), 500);
   }
 
   function collapseCurrent() {
     if (!currentRow) return;
     currentRow.classList.remove('expanded');
-    const arrow = currentRow.querySelector('.menu-item-arr');
-    if (arrow) arrow.textContent = 'Add ›';
-    // Clear inner after slide-down finishes (also avoids re-renders flashing)
     const inner = currentRow.querySelector('.inline-panel .inner');
     setTimeout(() => { if (inner) inner.innerHTML = ''; }, 450);
     currentRow = null;
     currentItem = null;
     currentCartIndex = -1;
+  }
+
+  /* Sync every visible + button with the current cart */
+  function syncAddButtons() {
+    const cart = getCart();
+    const counts = {};
+    cart.forEach(line => { counts[line.id] = (counts[line.id] || 0) + line.qty; });
+    document.querySelectorAll('.menu-row').forEach(row => {
+      const id = row.dataset.id;
+      const btn = row.querySelector('[data-add-btn]');
+      if (!btn) return;
+      const n = counts[id] || 0;
+      if (n > 0) {
+        btn.classList.add('in-bag');
+        btn.dataset.count = n;
+        btn.setAttribute('aria-label', `${n} in bag — tap to add another`);
+      } else {
+        btn.classList.remove('in-bag');
+        btn.removeAttribute('data-count');
+      }
+    });
   }
 
   /* ========================================================================
@@ -492,5 +521,9 @@
 
   /* Initial render */
   renderCart();
+  syncAddButtons();
+
+  /* Re-sync + buttons every time the cart changes anywhere on the page */
+  window.addEventListener('aroma:cart-updated', syncAddButtons);
 
 })();
