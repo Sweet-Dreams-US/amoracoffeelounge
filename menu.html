@@ -4,52 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu · Aroma Lounge</title>
-  <meta name="description" content="The full Aroma Lounge menu. Order ahead, customize every drink, and pay through the app. Signature lattes, traditional Arabic coffee, matcha, refreshers, waffles, and more." />
+  <meta name="description" content="The full Aroma Lounge menu. Order ahead, customize every drink, and pick up at Hamilton & Illinois in southwest Fort Wayne." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/menu.css" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2314100C'/%3E%3Ctext x='50' y='68' font-family='Cormorant Garamond,serif' font-style='italic' font-size='70' fill='%23B58A4B' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F5EBD8'/%3E%3Ctext x='50' y='72' font-family='Cormorant Garamond,serif' font-style='italic' font-size='80' fill='%23B58A4B' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
 
   <!-- Navigation -->
-  <nav class="nav scrolled">
-    <a href="index.html" class="nav-logo">
-      <span class="mark">✦</span>
-      <span>
-        Aroma
-        <span class="sub">Lounge · Est 2026</span>
-      </span>
+  <nav class="nav scrolled" id="nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-tagline">Hamilton &amp; Illinois</span>
+      <span class="nav-wordmark"><span class="mark">✦</span>Aroma</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#story">Story</a></li>
-      <li><a href="index.html#lounge">The Lounge</a></li>
-      <li><a href="index.html#visit">Visit</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="#" id="cart-open-nav" class="btn btn-ghost" style="position:relative;">
-        <span>Bag</span>
-        <span data-cart-count style="position:absolute; top:-6px; right:-6px; width:18px; height:18px; border-radius:50%; background:var(--bronze); color:var(--ink); font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center;">0</span>
-      </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="menu.html" class="nav-link" aria-current="page">Menu</a>
+      <a href="order.html" class="nav-link">Order</a>
+      <a href="index.html#visit" class="nav-link">Visit</a>
     </div>
+    <a href="order.html" class="nav-cta">
+      <span>Checkout</span>
+      <span class="nav-cta-count" data-cart-count style="display:none;">0</span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- Menu Header -->
   <div class="menu-page">
     <div class="container">
-      <div class="menu-header reveal">
-        <span class="eyebrow" style="justify-content:center;">The Menu</span>
-        <h1 class="display display-lg">Order ahead.</h1>
-        <p>Tap any item to customize and add to your bag. House syrups, milk swaps, and extra shots all available.</p>
+      <div class="menu-header fade-up">
+        <span class="pill pill-bronze">The Menu</span>
+        <h1 class="display">Made <span class="serif">to order.</span></h1>
+        <p>Single-origin espresso, signature lattes built on house syrups, traditional Arabic coffee service, breakfast and pastries all day. Tap the <strong style="color:var(--ink);">+</strong> next to anything to customize and add it to your bag.</p>
       </div>
     </div>
 
-    <!-- Category nav (sticky) -->
+    <!-- Sticky category nav -->
     <div class="cat-nav">
       <div class="cat-nav-track" id="cat-nav-track"></div>
     </div>
@@ -59,24 +57,92 @@
     </div>
   </div>
 
-  <!-- Mask + Cart drawer (only — items customize inline, no product drawer) -->
-  <div id="drawer-mask" class="drawer-mask"></div>
-
-  <!-- Cart drawer -->
-  <aside id="cart-drawer" class="drawer" aria-hidden="true">
-    <div class="drawer-head">
-      <h3>Your Bag</h3>
-      <button id="cart-drawer-close" class="drawer-close" aria-label="Close">×</button>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand-block">
+        <div class="footer-brand">Aroma<span class="dot">.</span></div>
+        <div class="footer-tag">Where Arabia meets the artisan</div>
+        <p>A premium coffee lounge in southwest Fort Wayne — opening 2026.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li>1361 W Hamilton Rd S</li>
+          <li>Fort Wayne, IN 46814</li>
+          <li><a href="tel:+12605550142">(260) 555-0142</a></li>
+          <li><a href="mailto:hello@aromalounge.coffee">hello@aromalounge.coffee</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="order.html">Order Online</a></li>
+          <li><a href="index.html#visit">Hours &amp; Map</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://instagram.com/aromaloungecoffee" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@aromaloungecoffee" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="https://facebook.com/aromaloungecoffee" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="admin/">Staff Portal</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="drawer-body"></div>
-    <div id="cart-summary" class="cart-summary"></div>
+    <div class="footer-bottom">
+      <span>© 2026 Aroma Lounge · Fort Wayne, Indiana</span>
+      <span>Demo site · prices illustrative</span>
+    </div>
+  </footer>
+
+  <!-- Drawer overlay -->
+  <div id="drawer-overlay" class="drawer-overlay"></div>
+
+  <!-- Customize sheet -->
+  <aside id="customize-sheet" class="customize-sheet" role="dialog" aria-label="Customize your order" aria-hidden="true">
+    <div class="customize-header">
+      <div>
+        <div id="cs-name" class="customize-name">Item</div>
+        <div id="cs-base" class="customize-base">Starting at $0.00</div>
+      </div>
+      <button id="cs-close" class="customize-close" aria-label="Close">×</button>
+    </div>
+    <div id="cs-body" class="customize-body"></div>
+    <div id="cs-foot" class="customize-footer"></div>
   </aside>
 
-  <!-- Floating cart button -->
-  <button id="cart-fab" class="cart-fab" aria-label="Open cart">
-    <span class="count">0</span>
+  <!-- Cart drawer -->
+  <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-label="Your bag" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <div class="cart-title">Your Bag</div>
+        <div class="cart-sub">Pickup · ready in 10–15 min</div>
+      </div>
+      <button id="cart-close" class="cart-close" aria-label="Close cart">×</button>
+    </div>
+    <div id="cart-body" class="cart-body"></div>
+    <div id="cart-footer" class="cart-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Subtotal</span>
+        <span id="cart-total" class="cart-total-amount">$0.00</span>
+      </div>
+      <a href="order.html" class="btn btn-primary btn-arrow" style="width:100%; justify-content:center;">
+        Checkout
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </a>
+      <p class="cart-note">Demo only · pay at pickup · tax added at checkout</p>
+    </div>
+  </aside>
+
+  <!-- Cart FAB -->
+  <button id="cart-fab" class="cart-fab" aria-label="View your bag">
+    <span id="cart-fab-count" class="count">0</span>
     <span>View Bag</span>
-    <span class="total">$0.00</span>
+    <span id="cart-fab-total" class="total">$0.00</span>
   </button>
 
   <!-- Toast -->

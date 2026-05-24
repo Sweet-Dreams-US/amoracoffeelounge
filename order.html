@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order · Aroma Lounge</title>
+  <meta name="description" content="Review your order, pick a time, and we'll have it ready when you walk in." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/menu.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F5EBD8'/%3E%3Ctext x='50' y='72' font-family='Cormorant Garamond,serif' font-style='italic' font-size='80' fill='%23B58A4B' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav scrolled" id="nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-tagline">Hamilton &amp; Illinois</span>
+      <span class="nav-wordmark"><span class="mark">✦</span>Aroma</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="menu.html" class="nav-link">Menu</a>
+      <a href="order.html" class="nav-link" aria-current="page">Order</a>
+      <a href="index.html#visit" class="nav-link">Visit</a>
+    </div>
+    <a href="menu.html" class="nav-cta">Add More →</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- CHECKOUT shell -->
+  <div id="checkout-shell" class="order-page">
+    <div class="container">
+      <div class="fade-up">
+        <span class="pill pill-bronze">Checkout</span>
+        <h1 class="display" style="margin-top: 1.25rem;">Review your <span class="serif">order.</span></h1>
+        <p class="lead mt-5" style="max-width: 60ch;">Pick a time, leave a name, and we'll have everything ready when you walk in. Demo checkout — no card is charged.</p>
+      </div>
+
+      <form id="order-form" class="checkout-grid" novalidate>
+        <!-- LEFT column -->
+        <div>
+          <!-- Order summary -->
+          <div class="checkout-panel" data-reveal>
+            <h3>Your <span class="accent">items.</span></h3>
+            <div id="order-summary"></div>
+            <div id="totals-block">
+              <div class="summary-row"><span>Subtotal</span><span class="val" id="order-subtotal">$0.00</span></div>
+              <div class="summary-row"><span>Tax (7%)</span><span class="val" id="order-tax">$0.00</span></div>
+              <div class="summary-total">
+                <span class="label">Total</span>
+                <span class="amount" id="order-total">$0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pickup -->
+          <div class="checkout-panel" data-reveal data-delay="1">
+            <h3>Pick it up <span class="accent">here.</span></h3>
+            <div style="display:flex; gap:1rem; padding:1rem; border:1px solid var(--line-2); border-radius:6px; background:var(--bg);">
+              <div style="font-family:var(--font-display); font-style:italic; font-size:2rem; color:var(--bronze-deep); line-height:1;">✦</div>
+              <div>
+                <div style="font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--ink);">Aroma Lounge</div>
+                <div style="font-size:0.92rem; color:var(--text-soft); margin-top:0.25rem;">1361 W Hamilton Rd S · Fort Wayne, IN 46814</div>
+                <div style="font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-dim); margin-top:0.5rem;">Southwest Fort Wayne · Hamilton &amp; Illinois</div>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 1.75rem;">Pickup <span class="accent">how.</span></h3>
+            <div class="method-pick">
+              <label>
+                <input type="radio" name="method" value="in-person" checked />
+                <span class="method-pick-name">In-person</span>
+                <span class="method-pick-detail">Walk in · grab from the bar</span>
+              </label>
+              <label>
+                <input type="radio" name="method" value="curbside" />
+                <span class="method-pick-name">Curbside</span>
+                <span class="method-pick-detail">Pull up · we bring it out</span>
+              </label>
+            </div>
+
+            <h3 style="margin-top: 1.75rem;">Pickup <span class="accent">when.</span></h3>
+            <div class="field">
+              <label for="pickup-time">Today's slots · 10-minute windows</label>
+              <select id="pickup-time" name="time" required></select>
+            </div>
+            <p id="hours-note" style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); margin-top: 0.6rem;">Open today · 5:30a — 10:40p</p>
+          </div>
+
+          <!-- Customer info -->
+          <div class="checkout-panel" data-reveal data-delay="2">
+            <h3>Your <span class="accent">info.</span></h3>
+            <div class="field-grid">
+              <div class="field">
+                <label for="cust-name">Name</label>
+                <input id="cust-name" name="name" type="text" required placeholder="Jamie Doe" />
+              </div>
+              <div class="field">
+                <label for="cust-phone">Phone</label>
+                <input id="cust-phone" name="phone" type="tel" required placeholder="(260) 555-0199" />
+              </div>
+              <div class="field span-2">
+                <label for="cust-email">Email (for receipt)</label>
+                <input id="cust-email" name="email" type="email" required placeholder="you@example.com" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Fake payment -->
+          <div class="checkout-panel fake-card" data-reveal data-delay="3">
+            <h3>Payment.</h3>
+            <p>Live site will use Square — secure card capture, Apple Pay, Google Pay, and split-tender.</p>
+            <div class="field">
+              <label for="card-num">Card number</label>
+              <input id="card-num" type="text" placeholder="4242 4242 4242 4242" autocomplete="off" />
+            </div>
+            <div class="fake-card-row" style="margin-top: 0.85rem;">
+              <div class="field">
+                <label for="card-name">Name on card</label>
+                <input id="card-name" type="text" placeholder="As it appears" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="card-exp">Expires</label>
+                <input id="card-exp" type="text" placeholder="MM/YY" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="card-cvc">CVC</label>
+                <input id="card-cvc" type="text" placeholder="123" autocomplete="off" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT sticky panel -->
+        <div data-reveal data-delay="2">
+          <div class="checkout-panel place-order-card">
+            <h3>Ready to <span class="accent">go.</span></h3>
+            <div class="meta-row"><span>Pickup</span><span class="val" id="place-pickup">~15 min</span></div>
+            <div class="meta-row"><span>Method</span><span class="val" id="place-method">In-person</span></div>
+            <div class="meta-row big"><span>Total</span><span class="val" id="place-total">$0.00</span></div>
+            <button id="place-order" type="submit" class="btn-place">
+              Place Order
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+            </button>
+            <p class="cart-note" style="margin-top: 0.85rem;">Demo · no card will be charged · no order will be sent</p>
+            <div class="divider"></div>
+            <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); line-height: 1.7;">
+              When live, this routes through Square's hosted checkout — PCI compliant, with the same flow as the in-store register.
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SUCCESS shell (hidden initially) -->
+  <div id="success-shell" class="order-page" style="display: none;">
+    <div class="container">
+      <div class="order-success">
+        <div class="check-mark">✓</div>
+        <span class="pill pill-bronze" style="margin: 0 auto;">Order placed</span>
+        <h1 class="display">See you in a <span class="serif">few minutes.</span></h1>
+        <p class="lead mx-auto" style="margin-inline: auto;">We'll have everything ready and bagged when you walk in. Show your name at the counter — your coffee's on the bar.</p>
+
+        <div class="checkout-panel" style="max-width: 560px; margin: 2.5rem auto 0; text-align: left;">
+          <div class="summary-row"><span>Confirmation</span><span class="val" id="success-id">AL-XXXX</span></div>
+          <div class="summary-row"><span>Pickup at</span><span class="val">Aroma Lounge · Hamilton &amp; Illinois</span></div>
+          <div class="summary-row"><span>Method</span><span class="val" id="success-method">In-person</span></div>
+          <div class="summary-row"><span>Ready by</span><span class="val" id="success-time">—</span></div>
+          <div class="summary-row" style="border-top: 1px solid var(--ink); padding-top: 1rem; margin-top: 0.5rem;">
+            <span>Total charged</span>
+            <span class="val" style="font-family: var(--font-display); font-style: italic; font-size: 1.6rem;" id="success-total">$0.00</span>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top: 2.5rem;">
+          <a href="menu.html" class="btn btn-bronze btn-arrow">Order Again
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+          </a>
+          <a href="index.html#visit" class="btn btn-arrow">Get Directions
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand-block">
+        <div class="footer-brand">Aroma<span class="dot">.</span></div>
+        <div class="footer-tag">Where Arabia meets the artisan</div>
+        <p>A premium coffee lounge in southwest Fort Wayne — opening 2026.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li>1361 W Hamilton Rd S</li>
+          <li>Fort Wayne, IN 46814</li>
+          <li><a href="tel:+12605550142">(260) 555-0142</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="order.html">Order Online</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://instagram.com/aromaloungecoffee" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@aromaloungecoffee" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="admin/">Staff Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Aroma Lounge</span>
+      <span>Demo · prices illustrative</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/menu-data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/order.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
-/* ========================================================================
-   AROMA LOUNGE — Main interactions
-   ======================================================================== */
+/* ==========================================================================
+   AROMA LOUNGE — Site-wide interactions
+   ========================================================================== */
 
 (() => {
   'use strict';
@@ -10,9 +10,8 @@
     setTimeout(() => {
       const intro = document.querySelector('.intro');
       if (intro) intro.classList.add('done');
-      // Trigger first reveals immediately after intro fades
       document.body.classList.add('loaded');
-    }, 1700);
+    }, 1600);
   });
 
   /* ---------- Nav scrolled state ---------- */
@@ -22,7 +21,7 @@
     const onScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          nav.classList.toggle('scrolled', window.scrollY > 40);
+          nav.classList.toggle('scrolled', window.scrollY > 24);
           ticking = false;
         });
         ticking = true;
@@ -32,116 +31,76 @@
     onScroll();
   }
 
+  /* ---------- Mobile nav toggle ---------- */
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks  = document.getElementById('nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  }
+
   /* ---------- Reveal on scroll (IntersectionObserver) ---------- */
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -80px 0px' }
-  );
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  /* ---------- Split text → per-char reveal for headings with .split ---------- */
-  document.querySelectorAll('.split').forEach(el => {
-    const text = el.textContent;
-    el.textContent = '';
-    text.split('').forEach((c, i) => {
-      const span = document.createElement('span');
-      span.className = 'split-char';
-      span.textContent = c === ' ' ? ' ' : c;
-      span.style.transitionDelay = `${i * 0.025}s`;
-      el.appendChild(span);
-    });
-    observer.observe(el);
-    // Wrap in trigger: when parent comes into view, add 'in' to all children
-    const charObs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        el.querySelectorAll('.split-char').forEach(c => c.classList.add('in'));
-        charObs.disconnect();
-      }
-    }, { threshold: 0.5 });
-    charObs.observe(el);
-  });
-
-  /* ---------- Live clock & "today" hours highlight ---------- */
-  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-  document.querySelectorAll('.hours-grid').forEach(grid => {
-    const days = grid.querySelectorAll('.day');
-    days.forEach(d => {
-      if (d.textContent.trim() === today) {
-        d.classList.add('today');
-        const next = d.nextElementSibling;
-        if (next) next.classList.add('today');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
       }
     });
-  });
+  }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
 
   /* ---------- Animated counters ---------- */
   document.querySelectorAll('[data-count]').forEach(el => {
     const target = parseFloat(el.dataset.count);
     const suffix = el.dataset.suffix || '';
-    const counterObs = new IntersectionObserver(([entry]) => {
+    const cobs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         const start = performance.now();
-        const duration = 1600;
+        const dur = 1600;
         const step = now => {
-          const t = Math.min((now - start) / duration, 1);
+          const t = Math.min((now - start) / dur, 1);
           const eased = 1 - Math.pow(1 - t, 3);
           const val = target * eased;
           el.textContent = (target % 1 === 0 ? Math.round(val) : val.toFixed(1)) + suffix;
           if (t < 1) requestAnimationFrame(step);
         };
         requestAnimationFrame(step);
-        counterObs.disconnect();
+        cobs.disconnect();
       }
     }, { threshold: 0.6 });
-    counterObs.observe(el);
+    cobs.observe(el);
   });
 
-  /* ---------- Parallax hero (mild, performant) ---------- */
-  const heroMedia = document.querySelector('.hero-media img, .hero-media video');
-  if (heroMedia) {
-    let h = 0;
-    const onParallax = () => {
-      h = window.scrollY;
-      if (h < window.innerHeight) {
-        heroMedia.style.transform = `scale(1.08) translateY(${h * 0.18}px)`;
+  /* ---------- Live "today" hours highlight ---------- */
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+  document.querySelectorAll('.hours-grid').forEach(grid => {
+    grid.querySelectorAll('.day').forEach(d => {
+      if (d.textContent.trim() === today) {
+        d.classList.add('today');
+        const t = d.nextElementSibling;
+        if (t) t.classList.add('today');
       }
-    };
-    window.addEventListener('scroll', onParallax, { passive: true });
-  }
+    });
+  });
 
   /* ---------- Smooth anchor scrolling ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href');
-      if (id.length > 1) {
-        const target = document.querySelector(id);
-        if (target) {
+      if (id.length > 1 && id !== '#') {
+        const t = document.querySelector(id);
+        if (t) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          t.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     });
   });
 
-  /* ---------- Cart badge sync (read from localStorage) ---------- */
-  function syncCartBadge() {
-    const cart = JSON.parse(localStorage.getItem('aroma_cart') || '[]');
-    const count = cart.reduce((s, i) => s + (i.qty || 1), 0);
-    document.querySelectorAll('[data-cart-count]').forEach(el => {
-      el.textContent = count;
-      el.classList.toggle('has-items', count > 0);
-    });
-  }
-  syncCartBadge();
-  window.addEventListener('aroma:cart-updated', syncCartBadge);
-  window.addEventListener('storage', e => { if (e.key === 'aroma_cart') syncCartBadge(); });
+  /* ---------- Year (footer) ---------- */
+  document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
 })();

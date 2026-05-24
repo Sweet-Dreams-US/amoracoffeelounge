@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aroma Lounge · Premium Coffee & Lounge · Southwest Fort Wayne</title>
-  <meta name="description" content="Where Arabia meets the artisan. A premium coffee lounge at Hamilton & Illinois in Southwest Fort Wayne. Single-origin espresso, signature lattes, traditional Arabic ritual." />
+  <title>Aroma Lounge · Premium Coffee &amp; Lounge · Southwest Fort Wayne</title>
+  <meta name="description" content="Where Arabia meets the artisan. A premium coffee lounge at Hamilton & Illinois in southwest Fort Wayne. Single-origin espresso, signature lattes, traditional Arabic ritual." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2314100C'/%3E%3Ctext x='50' y='68' font-family='Cormorant Garamond,serif' font-style='italic' font-size='70' fill='%23B58A4B' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F5EBD8'/%3E%3Ctext x='50' y='72' font-family='Cormorant Garamond,serif' font-style='italic' font-size='80' fill='%23B58A4B' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
 
@@ -19,62 +19,59 @@
   <div class="intro">
     <div class="mark">A<span>·</span>L</div>
     <div class="intro-bar"></div>
-    <div style="font-size:10px; letter-spacing:.4em; color:rgba(244,236,219,0.4); text-transform:uppercase;">Aroma Lounge</div>
+    <div style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.4em; color: var(--text-faint); text-transform: uppercase;">Aroma Lounge</div>
   </div>
 
   <!-- Navigation -->
-  <nav class="nav">
-    <a href="/" class="nav-logo">
-      <span class="mark">✦</span>
-      <span>
-        Aroma
-        <span class="sub">Lounge · Est 2026</span>
-      </span>
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-tagline">Hamilton &amp; Illinois</span>
+      <span class="nav-wordmark"><span class="mark">✦</span>Aroma</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#story">Story</a></li>
-      <li><a href="#lounge">The Lounge</a></li>
-      <li><a href="#signature">Signature</a></li>
-      <li><a href="menu.html">Menu</a></li>
-      <li><a href="#visit">Visit</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="menu.html" class="btn btn-ghost" style="position:relative;">
-        <span>Order</span>
-        <span data-cart-count style="position:absolute; top:-6px; right:-6px; width:18px; height:18px; border-radius:50%; background:var(--bronze); color:var(--ink); font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; opacity:0;">0</span>
-      </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#story" class="nav-link">Story</a>
+      <a href="#lounge" class="nav-link">The Lounge</a>
+      <a href="menu.html" class="nav-link">Menu</a>
+      <a href="#visit" class="nav-link">Visit</a>
     </div>
+    <a href="order.html" class="nav-cta">
+      <span>Order</span>
+      <span class="nav-cta-count" data-cart-count style="display:none;">0</span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
   <header class="hero">
-    <div class="hero-media">
+    <div class="hero-bg">
       <img src="assets/img/hero-lounge.jpg" alt="Aroma Lounge interior" />
     </div>
-    <div class="hero-overlay"></div>
 
     <div class="container hero-content">
-      <span class="eyebrow reveal">Southwest Fort Wayne · Now Open</span>
-      <h1 class="display display-xl reveal reveal-d2" style="margin-block:24px;">
-        <span style="display:block;">An Arabic-inspired</span>
-        <span style="display:block; color:var(--bronze);">coffee ritual.</span>
+      <span class="pill pill-dark fade-up">Southwest Fort Wayne · Now Open</span>
+      <h1 class="h-mega fade-up" style="animation-delay: 0.15s; margin-top: 1.5rem;">
+        An Arabic-inspired<br/><span class="serif accent">coffee ritual.</span>
       </h1>
-      <p class="lede reveal reveal-d3">
+      <p class="lead fade-up" style="animation-delay: 0.3s;">
         Single-origin espresso pulled with intention, signature lattes built on house-made syrups, and a lounge designed to slow you down — at Hamilton &amp; Illinois.
       </p>
-      <div class="reveal reveal-d4" style="margin-top:40px; display:flex; gap:16px; flex-wrap:wrap;">
-        <a href="menu.html" class="btn btn-primary">Order Online</a>
-        <a href="#story" class="btn btn-ghost">Discover the Lounge</a>
+      <div class="hero-bottom fade-up" style="animation-delay: 0.45s;">
+        <a href="menu.html" class="btn btn-bronze btn-arrow">Order Online
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
+        <a href="#story" class="btn btn-light">Discover the Lounge</a>
       </div>
 
-      <div class="hero-meta reveal reveal-d4">
-        <div class="meta-item"><strong>Open Daily</strong>5:30 AM – Late</div>
-        <div class="meta-item"><strong>Hamilton & Illinois Rd</strong>Southwest Fort Wayne</div>
-        <div class="meta-item"><strong>(260) 555-0142</strong>Curbside · Catering</div>
+      <div class="hero-meta fade-up" style="animation-delay: 0.6s;">
+        <div class="item"><strong>Open Daily</strong>5:30 AM — Late</div>
+        <div class="item"><strong>Hamilton &amp; Illinois</strong>Southwest Fort Wayne</div>
+        <div class="item"><strong>(260) 555-0142</strong>Curbside · Catering</div>
       </div>
     </div>
 
-    <div class="hero-scroll-cue">Scroll</div>
+    <div class="hero-scroll">Scroll</div>
   </header>
 
   <!-- MARQUEE -->
@@ -85,22 +82,21 @@
       <span class="marquee-item">Saffron Gold Latte <span class="dot"></span></span>
       <span class="marquee-item">Kunafa Waffles <span class="dot"></span></span>
       <span class="marquee-item">Arabic Coffee Service <span class="dot"></span></span>
-      <span class="marquee-item">Daily-Made Baklava <span class="dot"></span></span>
-      <!-- Duplicated for loop -->
+      <span class="marquee-item">Daily Baklava <span class="dot"></span></span>
       <span class="marquee-item">Single Origin <span class="dot"></span></span>
       <span class="marquee-item">House Pistachio Milk <span class="dot"></span></span>
       <span class="marquee-item">Saffron Gold Latte <span class="dot"></span></span>
       <span class="marquee-item">Kunafa Waffles <span class="dot"></span></span>
       <span class="marquee-item">Arabic Coffee Service <span class="dot"></span></span>
-      <span class="marquee-item">Daily-Made Baklava <span class="dot"></span></span>
+      <span class="marquee-item">Daily Baklava <span class="dot"></span></span>
     </div>
   </section>
 
   <!-- STORY -->
-  <section class="section" id="story">
+  <section class="section section-cream" id="story">
     <div class="container">
       <div class="story">
-        <div class="story-img-stack reveal">
+        <div class="story-img-stack" data-reveal>
           <div class="story-img">
             <img src="assets/img/arabic-service.jpg" alt="Traditional Arabic coffee service" loading="lazy" />
           </div>
@@ -108,40 +104,40 @@
             <img src="assets/img/latte-art.jpg" alt="Latte art" loading="lazy" />
           </div>
         </div>
-        <div class="story-body">
-          <span class="eyebrow reveal">Our Philosophy</span>
-          <h2 class="display display-md reveal reveal-d2">A different kind of coffee shop.</h2>
-          <p class="lede reveal reveal-d3">For us, coffee isn't a transaction. It's a ritual — a moment carved out of the day, served in porcelain, accompanied by a date and a pause.</p>
-          <p class="reveal reveal-d4">Aroma Lounge began with a simple frustration: that Fort Wayne deserved a coffee space designed for sitting, lingering, and being. Inspired by the qahwa houses of Riyadh and the considered third-wave cafés of Melbourne, we built a place where the bean is roasted in small lots, the milk is steamed to within a degree, and the room itself is the second-best part of your morning.</p>
-          <p class="reveal reveal-d4">Every signature drink is composed in-house. Pistachios are crushed fresh. Rose water is sourced from Isparta. Cardamom is ground the day it's used. The result is what we'd describe as a third place — not work, not home, but yours.</p>
-          <div class="sig reveal reveal-d4">— The Aroma Team</div>
+        <div class="story-body" data-reveal data-delay="2">
+          <span class="pill">Our Philosophy</span>
+          <h2 class="h-1" style="margin-top: 1.25rem;">A different kind of <span class="serif">coffee shop.</span></h2>
+          <p class="lead" style="margin-top: 1.25rem;">For us, coffee isn't a transaction. It's a ritual — a moment carved out of the day, served in porcelain, accompanied by a date and a pause.</p>
+          <p>Aroma Lounge began with a simple frustration: that Fort Wayne deserved a coffee space designed for sitting, lingering, and being. Inspired by the qahwa houses of Riyadh and the considered third-wave cafés of Melbourne, we built a place where the bean is roasted in small lots, the milk is steamed to within a degree, and the room itself is the second-best part of your morning.</p>
+          <p>Every signature drink is composed in-house. Pistachios are crushed fresh. Rose water is sourced from Isparta. Cardamom is ground the day it's used. The result is what we'd describe as a third place — not work, not home, but yours.</p>
+          <div class="sig">— The Aroma Team</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- LOUNGE FEATURE -->
-  <section class="section bg-espresso" id="lounge">
+  <section class="section section-dark" id="lounge">
     <div class="container">
-      <div class="text-center reveal" style="margin-bottom:64px;">
-        <span class="eyebrow" style="justify-content:center;">The Lounge</span>
-        <h2 class="display display-lg" style="margin-top:16px;">Designed for the long sit.</h2>
+      <div class="text-center" data-reveal style="margin-bottom: 3rem;">
+        <span class="pill pill-dark" style="justify-content: center;">The Lounge</span>
+        <h2 class="display" style="margin-top: 1.25rem;">Designed for <span class="serif">the long sit.</span></h2>
       </div>
 
-      <img src="assets/img/lounge-wide.jpg" alt="Aroma Lounge interior" class="lounge-wide reveal" loading="lazy" />
+      <img src="assets/img/lounge-wide.jpg" alt="Aroma Lounge interior" class="lounge-wide" loading="lazy" data-reveal />
 
       <div class="lounge-cols">
-        <div class="lounge-col reveal">
+        <div class="lounge-col" data-reveal>
           <span class="num">01</span>
-          <h3>Velvet & Brass</h3>
+          <h3>Velvet &amp; Brass</h3>
           <p>Emerald banquettes, hammered brass tabletops, and Mashrabiya wood screens — every surface chosen to absorb sound and the day with it.</p>
         </div>
-        <div class="lounge-col reveal reveal-d2">
+        <div class="lounge-col" data-reveal data-delay="2">
           <span class="num">02</span>
           <h3>Two Floors, One Mood</h3>
           <p>Quiet study upstairs with leather lounge chairs and dimmable Edison sconces. Open social on the main floor with the espresso bar at its heart.</p>
         </div>
-        <div class="lounge-col reveal reveal-d3">
+        <div class="lounge-col" data-reveal data-delay="3">
           <span class="num">03</span>
           <h3>Live Til Late</h3>
           <p>Espresso turns to amaro after sundown. Friday and Saturday: live oud, low light, dessert until midnight.</p>
@@ -151,18 +147,20 @@
   </section>
 
   <!-- SIGNATURE -->
-  <section class="section" id="signature">
+  <section class="section section-cream" id="signature">
     <div class="container">
-      <div class="flex-between reveal" style="margin-bottom:56px; flex-wrap:wrap; gap:24px;">
+      <div class="flex justify-between items-end" data-reveal style="margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem;">
         <div>
-          <span class="eyebrow">The Signature Three</span>
-          <h2 class="display display-lg" style="margin-top:16px;">Built only here.</h2>
+          <span class="pill">The Signature Three</span>
+          <h2 class="display" style="margin-top: 1.25rem;">Built <span class="serif">only here.</span></h2>
         </div>
-        <a href="menu.html" class="link-arrow">See the full menu <span class="arr">→</span></a>
+        <a href="menu.html" class="btn btn-ghost btn-arrow">See full menu
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
       </div>
 
       <div class="sig-grid">
-        <a href="menu.html#aroma-latte" class="sig-card reveal">
+        <a href="menu.html#aroma-latte" class="sig-card" data-reveal>
           <img src="assets/img/rose-latte.jpg" alt="The Aroma signature latte" loading="lazy" />
           <div class="sig-card-body">
             <h4>The Aroma</h4>
@@ -170,7 +168,7 @@
             <div class="price">$7.25 · Most Loved</div>
           </div>
         </a>
-        <a href="menu.html#qahwa" class="sig-card reveal reveal-d2">
+        <a href="menu.html#qahwa" class="sig-card" data-reveal data-delay="2">
           <img src="assets/img/arabic-service.jpg" alt="Arabic coffee service" loading="lazy" />
           <div class="sig-card-body">
             <h4>Qahwa Service</h4>
@@ -178,7 +176,7 @@
             <div class="price">$6.50 · Tradition</div>
           </div>
         </a>
-        <a href="menu.html#baklava" class="sig-card reveal reveal-d3">
+        <a href="menu.html#baklava" class="sig-card" data-reveal data-delay="3">
           <img src="assets/img/baklava.jpg" alt="Baklava plate" loading="lazy" />
           <div class="sig-card-body">
             <h4>Pistachio Baklava</h4>
@@ -191,64 +189,64 @@
   </section>
 
   <!-- PULL QUOTE -->
-  <section class="section-sm bg-ink" style="border-block:1px solid var(--line-soft);">
+  <section class="section-tight section-oat">
     <div class="container">
-      <div class="pullquote reveal">
+      <div class="pullquote" data-reveal>
         <div class="quote">A coffee shop that finally takes itself seriously — without taking itself too seriously.</div>
         <div class="attrib">— Fort Wayne Magazine, May 2026</div>
       </div>
     </div>
   </section>
 
-  <!-- LIVE NUMBERS -->
-  <section class="section">
+  <!-- STATS -->
+  <section class="section section-cream">
     <div class="container">
-      <div class="text-center reveal" style="margin-bottom:56px;">
-        <span class="eyebrow" style="justify-content:center;">By the Numbers</span>
-        <h2 class="display display-md" style="margin-top:16px;">Small, considered, ours.</h2>
+      <div class="text-center" data-reveal style="margin-bottom: 3rem;">
+        <span class="pill">By the Numbers</span>
+        <h2 class="h-1" style="margin-top: 1.25rem;">Small, considered, <span class="serif">ours.</span></h2>
       </div>
       <div class="grid grid-4">
-        <div class="reveal text-center">
-          <div class="display display-md" style="color:var(--bronze)"><span data-count="42" data-suffix="">0</span></div>
-          <p class="muted" style="font-size:13px; letter-spacing:.2em; text-transform:uppercase; margin-top:8px;">Menu Items</p>
+        <div class="text-center" data-reveal>
+          <div class="stat-num"><span data-count="42">0</span></div>
+          <p class="stat-label">Menu Items</p>
         </div>
-        <div class="reveal reveal-d2 text-center">
-          <div class="display display-md" style="color:var(--bronze)"><span data-count="9" data-suffix="">0</span></div>
-          <p class="muted" style="font-size:13px; letter-spacing:.2em; text-transform:uppercase; margin-top:8px;">House Syrups</p>
+        <div class="text-center" data-reveal data-delay="2">
+          <div class="stat-num"><span data-count="9">0</span></div>
+          <p class="stat-label">House Syrups</p>
         </div>
-        <div class="reveal reveal-d3 text-center">
-          <div class="display display-md" style="color:var(--bronze)"><span data-count="3" data-suffix="">0</span></div>
-          <p class="muted" style="font-size:13px; letter-spacing:.2em; text-transform:uppercase; margin-top:8px;">Single-Origin Roasts</p>
+        <div class="text-center" data-reveal data-delay="3">
+          <div class="stat-num"><span data-count="3">0</span></div>
+          <p class="stat-label">Single-Origin Roasts</p>
         </div>
-        <div class="reveal reveal-d4 text-center">
-          <div class="display display-md" style="color:var(--bronze)"><span data-count="24" data-suffix="hr">0</span></div>
-          <p class="muted" style="font-size:13px; letter-spacing:.2em; text-transform:uppercase; margin-top:8px;">Cold Brew Steep</p>
+        <div class="text-center" data-reveal data-delay="4">
+          <div class="stat-num"><span data-count="24" data-suffix="hr">0</span></div>
+          <p class="stat-label">Cold Brew Steep</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- VISIT -->
-  <section class="section bg-espresso" id="visit">
+  <section class="section section-oat" id="visit">
     <div class="container">
-      <div class="text-center reveal" style="margin-bottom:56px;">
-        <span class="eyebrow" style="justify-content:center;">Find Us</span>
-        <h2 class="display display-lg" style="margin-top:16px;">Visit the Lounge.</h2>
+      <div class="text-center" data-reveal style="margin-bottom: 3rem;">
+        <span class="pill">Find Us</span>
+        <h2 class="display" style="margin-top: 1.25rem;">Visit <span class="serif">the lounge.</span></h2>
       </div>
       <div class="locale">
-        <div class="locale-card reveal">
-          <span class="eyebrow">Hamilton & Illinois</span>
-          <h3 class="display display-sm" style="margin-top:16px;">1361 W Hamilton Rd S<br/>Fort Wayne, IN 46814</h3>
-          <p style="margin-top:16px;">Free parking. Curbside via the app. Catering for parties up to 60. Reserve the upstairs lounge for private events.</p>
+        <div class="locale-card" data-reveal>
+          <span class="pill pill-bronze">Hamilton &amp; Illinois</span>
+          <h3 class="h-2" style="margin-top: 1.25rem;">1361 W Hamilton Rd S<br/>Fort Wayne, IN 46814</h3>
+          <p style="margin-top: 1rem; color: var(--text-soft);">Free parking. Curbside via the app. Catering for parties up to 60. Reserve the upstairs lounge for private events.</p>
 
-          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:32px;">
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem;">
             <a href="tel:+12605550142" class="btn btn-primary">Call (260) 555-0142</a>
             <a href="https://maps.google.com/?q=1361+W+Hamilton+Rd+S,+Fort+Wayne,+IN+46814" target="_blank" rel="noopener" class="btn btn-ghost">Get Directions</a>
           </div>
 
-          <div style="margin-top:48px; padding-top:32px; border-top:1px solid var(--line-soft);">
-            <span class="eyebrow">Hours</span>
-            <div class="hours-grid">
+          <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line);">
+            <span class="pill">Hours</span>
+            <div class="hours-grid" style="margin-top: 0.75rem;">
               <span class="day">Monday</span><span class="time">5:30A – 10:40P</span>
               <span class="day">Tuesday</span><span class="time">5:30A – 10:40P</span>
               <span class="day">Wednesday</span><span class="time">5:30A – 10:40P</span>
@@ -259,7 +257,7 @@
             </div>
           </div>
         </div>
-        <div class="locale-map reveal reveal-d2">
+        <div class="locale-map" data-reveal data-delay="2">
           <iframe
             src="https://www.google.com/maps?q=1361+W+Hamilton+Rd+S,+Fort+Wayne,+IN+46814&output=embed"
             loading="lazy"
@@ -271,13 +269,15 @@
   </section>
 
   <!-- CTA -->
-  <section class="section">
+  <section class="section section-cream">
     <div class="container text-center">
-      <div class="ornament reveal"><span class="icon"></span></div>
-      <h2 class="display display-xl reveal" style="margin-top:32px;">Slow down.</h2>
-      <p class="lede mx-auto reveal reveal-d2" style="margin-top:24px;">Order ahead, sit a while, or just stop by. We're always making something good.</p>
-      <div class="reveal reveal-d3" style="margin-top:40px;">
-        <a href="menu.html" class="btn btn-primary">Begin Your Order</a>
+      <div class="ornament" data-reveal><span class="icon"></span></div>
+      <h2 class="display" data-reveal style="margin-top: 2rem;">Slow <span class="serif">down.</span></h2>
+      <p class="lead mx-auto" data-reveal data-delay="2" style="margin: 1.5rem auto 0;">Order ahead, sit a while, or just stop by. We're always making something good.</p>
+      <div data-reveal data-delay="3" style="margin-top: 2.5rem;">
+        <a href="menu.html" class="btn btn-primary btn-arrow">Begin Your Order
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -285,17 +285,13 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="display">Aroma<span style="color:var(--bronze)">.</span></div>
-        <p>Where Arabia meets the artisan. A premium coffee lounge in southwest Fort Wayne.</p>
-        <div style="display:flex; gap:12px; margin-top:24px;">
-          <a href="https://instagram.com/aromaloungecoffee" target="_blank" rel="noopener" class="btn-icon" aria-label="Instagram">IG</a>
-          <a href="https://tiktok.com/@aromaloungecoffee" target="_blank" rel="noopener" class="btn-icon" aria-label="TikTok">TT</a>
-          <a href="https://facebook.com/aromaloungecoffee" target="_blank" rel="noopener" class="btn-icon" aria-label="Facebook">FB</a>
-        </div>
+      <div class="footer-brand-block">
+        <div class="footer-brand">Aroma<span class="dot">.</span></div>
+        <div class="footer-tag">Where Arabia meets the artisan</div>
+        <p>A premium coffee lounge in southwest Fort Wayne — opening 2026.</p>
       </div>
       <div class="footer-col">
-        <h5>Visit</h5>
+        <h4>Visit</h4>
         <ul>
           <li>1361 W Hamilton Rd S</li>
           <li>Fort Wayne, IN 46814</li>
@@ -304,31 +300,32 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Explore</h5>
+        <h4>Explore</h4>
         <ul>
           <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="order.html">Order Online</a></li>
           <li><a href="#story">Our Story</a></li>
-          <li><a href="#lounge">The Lounge</a></li>
-          <li><a href="#visit">Hours</a></li>
+          <li><a href="#visit">Hours &amp; Map</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>More</h5>
+        <h4>Follow</h4>
         <ul>
-          <li><a href="menu.html">Order Online</a></li>
-          <li><a href="#">Gift Cards</a></li>
-          <li><a href="#">Private Events</a></li>
+          <li><a href="https://instagram.com/aromaloungecoffee" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@aromaloungecoffee" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="https://facebook.com/aromaloungecoffee" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="admin/">Staff Portal</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Aroma Lounge · All rights reserved</span>
-      <span>Crafted in Fort Wayne, Indiana</span>
+      <span>© 2026 Aroma Lounge · Fort Wayne, Indiana</span>
+      <span>Crafted with care</span>
     </div>
   </footer>
 
   <script src="assets/js/menu-data.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/menu.js"></script>
 </body>
 </html>
