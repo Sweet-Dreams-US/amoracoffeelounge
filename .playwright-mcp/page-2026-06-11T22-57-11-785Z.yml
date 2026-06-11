@@ -1,0 +1,869 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Hamilton & Illinois · Fort Wayne ✦ Aroma Lounge" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=e4]: Hamilton & Illinois · Fort Wayne
+      - generic [ref=e5]:
+        - generic [ref=e6]: ✦
+        - text: Aroma Lounge
+    - generic [ref=e7]:
+      - link "Home" [ref=e8] [cursor=pointer]:
+        - /url: index.html
+      - link "Menu" [ref=e9] [cursor=pointer]:
+        - /url: menu.html
+      - link "Order" [ref=e10] [cursor=pointer]:
+        - /url: order.html
+      - link "Visit" [ref=e11] [cursor=pointer]:
+        - /url: index.html#visit
+    - link "Checkout" [ref=e12] [cursor=pointer]:
+      - /url: order.html
+      - generic [ref=e13]: Checkout
+  - generic [ref=e14]:
+    - banner [ref=e16]:
+      - generic [ref=e17]: The Menu · القائمة
+      - heading "Made to order" [level=1] [ref=e18]
+      - paragraph [ref=e19]:
+        - text: Qahwa from the dallah, lattes on house syrups, kunafa from the kitchen. Tap the
+        - strong [ref=e20]: +
+        - text: to add anything straight to your bag — tap the row to customize first.
+      - generic [ref=e21]: ✦ Ready in about eight minutes
+    - generic [ref=e23]:
+      - button "Signature Lounge التوقيع" [ref=e24] [cursor=pointer]:
+        - generic [ref=e25]: Signature Lounge
+        - generic [ref=e26]: التوقيع
+      - button "Espresso Bar إسبريسو" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: Espresso Bar
+        - generic [ref=e29]: إسبريسو
+      - button "Arabic Tradition قهوة عربية" [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: Arabic Tradition
+        - generic [ref=e32]: قهوة عربية
+      - button "Specialty Lattes لاتيه" [ref=e33] [cursor=pointer]:
+        - generic [ref=e34]: Specialty Lattes
+        - generic [ref=e35]: لاتيه
+      - button "Matcha & Tea ماتشا وشاي" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]: Matcha & Tea
+        - generic [ref=e38]: ماتشا وشاي
+      - button "Cold Brew & Iced قهوة باردة" [ref=e39] [cursor=pointer]:
+        - generic [ref=e40]: Cold Brew & Iced
+        - generic [ref=e41]: قهوة باردة
+      - button "Refreshers منعشات" [ref=e42] [cursor=pointer]:
+        - generic [ref=e43]: Refreshers
+        - generic [ref=e44]: منعشات
+      - button "Frappes فرابيه" [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]: Frappes
+        - generic [ref=e47]: فرابيه
+      - button "Smoothies سموذي" [ref=e48] [cursor=pointer]:
+        - generic [ref=e49]: Smoothies
+        - generic [ref=e50]: سموذي
+      - button "Waffles & Crepes وافل وكريب" [ref=e51] [cursor=pointer]:
+        - generic [ref=e52]: Waffles & Crepes
+        - generic [ref=e53]: وافل وكريب
+      - button "Sandwiches سندويشات" [ref=e54] [cursor=pointer]:
+        - generic [ref=e55]: Sandwiches
+        - generic [ref=e56]: سندويشات
+      - button "Pastries حلويات" [ref=e57] [cursor=pointer]:
+        - generic [ref=e58]: Pastries
+        - generic [ref=e59]: حلويات
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - heading "Signature Lounge · التوقيع" [level=2] [ref=e64]:
+            - text: Signature Lounge
+            - generic [ref=e65]: · التوقيع
+          - paragraph [ref=e66]: House compositions, made only here. · 6 items
+        - generic [ref=e67]:
+          - generic [ref=e68] [cursor=pointer]:
+            - img "The Aroma" [ref=e70]
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - generic [ref=e73]:
+                  - generic "Most loved" [ref=e74]
+                  - generic [ref=e75]: The Aroma
+                  - generic [ref=e76]: Most Loved
+                - generic [ref=e77]: $7.25
+              - generic [ref=e78]: Our signature — double espresso, oat milk, rose-cardamom syrup, dusted with rose petals and crushed pistachio.
+              - generic [ref=e79]: 220 cal
+            - button "Add The Aroma to bag" [ref=e80]:
+              - generic [ref=e81]: +
+          - generic [ref=e82] [cursor=pointer]:
+            - img "Gold Dust Latte" [ref=e84]
+            - generic [ref=e85]:
+              - generic [ref=e86]:
+                - generic [ref=e87]:
+                  - generic [ref=e88]: Gold Dust Latte
+                  - generic [ref=e89]: Luxe
+                - generic [ref=e90]: $12.00
+              - generic [ref=e91]: Saffron-infused espresso, steamed whole milk, finished with edible 24-karat gold leaf.
+              - generic [ref=e92]: 240 cal
+            - button "Add Gold Dust Latte to bag" [ref=e93]:
+              - generic [ref=e94]: +
+          - generic [ref=e95] [cursor=pointer]:
+            - img "Pistachio Rose" [ref=e97]
+            - generic [ref=e98]:
+              - generic [ref=e99]:
+                - generic [ref=e100]:
+                  - generic "Most loved" [ref=e101]
+                  - generic [ref=e102]: Pistachio Rose
+                - generic [ref=e103]: $7.75
+              - generic [ref=e104]: House pistachio milk, espresso, rose water, lightly sweetened, pistachio crumble on top.
+              - generic [ref=e105]: 280 cal
+            - button "Add Pistachio Rose to bag" [ref=e106]:
+              - generic [ref=e107]: +
+          - generic [ref=e108] [cursor=pointer]:
+            - img "Desert Bloom" [ref=e110]
+            - generic [ref=e111]:
+              - generic [ref=e112]:
+                - generic [ref=e114]: Desert Bloom
+                - generic [ref=e115]: $7.00
+              - generic [ref=e116]: Date-sweetened espresso, cardamom-infused oat steam, cinnamon dust.
+              - generic [ref=e117]: 210 cal
+            - button "Add Desert Bloom to bag" [ref=e118]:
+              - generic [ref=e119]: +
+          - generic [ref=e120] [cursor=pointer]:
+            - img "Oud Mocha" [ref=e122]
+            - generic [ref=e123]:
+              - generic [ref=e124]:
+                - generic [ref=e126]: Oud Mocha
+                - generic [ref=e127]: $7.50
+              - generic [ref=e128]: Single-origin Ethiopian, dark chocolate, oat, smoked salt rim, drizzle of caramel.
+              - generic [ref=e129]: 310 cal
+            - button "Add Oud Mocha to bag" [ref=e130]:
+              - generic [ref=e131]: +
+          - generic [ref=e132] [cursor=pointer]:
+            - img "Midnight Velvet" [ref=e134]
+            - generic [ref=e135]:
+              - generic [ref=e136]:
+                - generic [ref=e138]: Midnight Velvet
+                - generic [ref=e139]: $7.25
+              - generic [ref=e140]: Cold brew concentrate, vanilla cream, lavender, served over a single large ice sphere.
+              - generic [ref=e141]: 180 cal
+            - button "Add Midnight Velvet to bag" [ref=e142]:
+              - generic [ref=e143]: +
+      - generic [ref=e144]:
+        - generic [ref=e145]:
+          - heading "Espresso Bar · إسبريسو" [level=2] [ref=e146]:
+            - text: Espresso Bar
+            - generic [ref=e147]: · إسبريسو
+          - paragraph [ref=e148]: The pure pursuit. · 9 items
+        - generic [ref=e149]:
+          - generic [ref=e150] [cursor=pointer]:
+            - generic [ref=e151]:
+              - generic [ref=e152]:
+                - generic [ref=e154]: Espresso
+                - generic [ref=e155]: $3.50
+              - generic [ref=e156]: A single shot, pulled to 25 seconds.
+              - generic [ref=e157]: 5 cal
+            - button "Add Espresso to bag" [ref=e158]:
+              - generic [ref=e159]: +
+          - generic [ref=e160] [cursor=pointer]:
+            - generic [ref=e161]:
+              - generic [ref=e162]:
+                - generic [ref=e164]: Doppio
+                - generic [ref=e165]: $4.25
+              - generic [ref=e166]: Double shot. The honest one.
+              - generic [ref=e167]: 10 cal
+            - button "Add Doppio to bag" [ref=e168]:
+              - generic [ref=e169]: +
+          - generic [ref=e170] [cursor=pointer]:
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - generic [ref=e174]: Macchiato
+                - generic [ref=e175]: $4.50
+              - generic [ref=e176]: Double espresso, dollop of foam.
+              - generic [ref=e177]: 20 cal
+            - button "Add Macchiato to bag" [ref=e178]:
+              - generic [ref=e179]: +
+          - generic [ref=e180] [cursor=pointer]:
+            - generic [ref=e181]:
+              - generic [ref=e182]:
+                - generic [ref=e183]:
+                  - generic "Most loved" [ref=e184]
+                  - generic [ref=e185]: Cortado
+                - generic [ref=e186]: $4.75
+              - generic [ref=e187]: Equal parts espresso and warm milk.
+              - generic [ref=e188]: 60 cal
+            - button "Add Cortado to bag" [ref=e189]:
+              - generic [ref=e190]: +
+          - generic [ref=e191] [cursor=pointer]:
+            - generic [ref=e192]:
+              - generic [ref=e193]:
+                - generic [ref=e195]: Americano
+                - generic [ref=e196]: $4.25
+              - generic [ref=e197]: Espresso, hot water, served long.
+              - generic [ref=e198]: 15 cal
+            - button "Add Americano to bag" [ref=e199]:
+              - generic [ref=e200]: +
+          - generic [ref=e201] [cursor=pointer]:
+            - generic [ref=e202]:
+              - generic [ref=e203]:
+                - generic [ref=e205]: Flat White
+                - generic [ref=e206]: $5.50
+              - generic [ref=e207]: Double ristretto, velvet milk, no foam.
+              - generic [ref=e208]: 130 cal
+            - button "Add Flat White to bag" [ref=e209]:
+              - generic [ref=e210]: +
+          - generic [ref=e211] [cursor=pointer]:
+            - generic [ref=e212]:
+              - generic [ref=e213]:
+                - generic [ref=e215]: Cappuccino
+                - generic [ref=e216]: $5.25
+              - generic [ref=e217]: Classic third-third-third.
+              - generic [ref=e218]: 120 cal
+            - button "Add Cappuccino to bag" [ref=e219]:
+              - generic [ref=e220]: +
+          - generic [ref=e221] [cursor=pointer]:
+            - generic [ref=e222]:
+              - generic [ref=e223]:
+                - generic [ref=e224]:
+                  - generic "Most loved" [ref=e225]
+                  - generic [ref=e226]: Café Latte
+                - generic [ref=e227]: $5.50
+              - generic [ref=e228]: Espresso, steamed milk, light foam.
+              - generic [ref=e229]: 180 cal
+            - button "Add Café Latte to bag" [ref=e230]:
+              - generic [ref=e231]: +
+          - generic [ref=e232] [cursor=pointer]:
+            - generic [ref=e233]:
+              - generic [ref=e234]:
+                - generic [ref=e236]: Café Mocha
+                - generic [ref=e237]: $6.00
+              - generic [ref=e238]: Espresso, chocolate, milk, whip.
+              - generic [ref=e239]: 320 cal
+            - button "Add Café Mocha to bag" [ref=e240]:
+              - generic [ref=e241]: +
+      - generic [ref=e242]:
+        - generic [ref=e243]:
+          - heading "Arabic Tradition · قهوة عربية" [level=2] [ref=e244]:
+            - text: Arabic Tradition
+            - generic [ref=e245]: · قهوة عربية
+          - paragraph [ref=e246]: Centuries of ritual. · 5 items
+        - generic [ref=e247]:
+          - generic [ref=e248] [cursor=pointer]:
+            - img "Qahwa (Arabic Coffee)" [ref=e250]
+            - generic [ref=e251]:
+              - generic [ref=e252]:
+                - generic [ref=e253]:
+                  - generic [ref=e254]: Qahwa (Arabic Coffee)
+                  - generic [ref=e255]: Tradition
+                - generic [ref=e256]: $6.50
+              - generic [ref=e257]: Lightly roasted bean, cardamom, saffron. Served in finjan with dates.
+              - generic [ref=e258]: 25 cal
+            - button "Add Qahwa (Arabic Coffee) to bag" [ref=e259]:
+              - generic [ref=e260]: +
+          - generic [ref=e261] [cursor=pointer]:
+            - generic [ref=e262]:
+              - generic [ref=e263]:
+                - generic [ref=e265]: Turkish Coffee
+                - generic [ref=e266]: $5.75
+              - generic [ref=e267]: Finely ground, double-boiled in cezve, unfiltered.
+              - generic [ref=e268]: 15 cal
+            - button "Add Turkish Coffee to bag" [ref=e269]:
+              - generic [ref=e270]: +
+          - generic [ref=e271] [cursor=pointer]:
+            - generic [ref=e272]:
+              - generic [ref=e273]:
+                - generic [ref=e274]:
+                  - generic "Most loved" [ref=e275]
+                  - generic [ref=e276]: Karak Chai
+                - generic [ref=e277]: $5.25
+              - generic [ref=e278]: Strong black tea, cardamom, ginger, evaporated milk, simmered slow.
+              - generic [ref=e279]: 160 cal
+            - button "Add Karak Chai to bag" [ref=e280]:
+              - generic [ref=e281]: +
+          - generic [ref=e282] [cursor=pointer]:
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - generic [ref=e286]: Saffron Honey Latte
+                - generic [ref=e287]: $7.25
+              - generic [ref=e288]: Iranian saffron threads, espresso, honey, steamed milk.
+              - generic [ref=e289]: 220 cal
+            - button "Add Saffron Honey Latte to bag" [ref=e290]:
+              - generic [ref=e291]: +
+          - generic [ref=e292] [cursor=pointer]:
+            - generic [ref=e293]:
+              - generic [ref=e294]:
+                - generic [ref=e295]:
+                  - generic [ref=e296]: Sahlab
+                  - generic [ref=e297]: Winter
+                - generic [ref=e298]: $6.25
+              - generic [ref=e299]: Warm cream pudding drink, rose water, pistachio, coconut, cinnamon.
+              - generic [ref=e300]: 290 cal
+            - button "Add Sahlab to bag" [ref=e301]:
+              - generic [ref=e302]: +
+      - generic [ref=e303]:
+        - generic [ref=e304]:
+          - heading "Specialty Lattes · لاتيه" [level=2] [ref=e305]:
+            - text: Specialty Lattes
+            - generic [ref=e306]: · لاتيه
+          - paragraph [ref=e307]: Reimagined classics. · 6 items
+        - generic [ref=e308]:
+          - generic [ref=e309] [cursor=pointer]:
+            - generic [ref=e310]:
+              - generic [ref=e311]:
+                - generic [ref=e313]: Lavender Honey
+                - generic [ref=e314]: $6.50
+              - generic [ref=e315]: Espresso, lavender syrup, wildflower honey, oat milk.
+              - generic [ref=e316]: 200 cal
+            - button "Add Lavender Honey to bag" [ref=e317]:
+              - generic [ref=e318]: +
+          - generic [ref=e319] [cursor=pointer]:
+            - generic [ref=e320]:
+              - generic [ref=e321]:
+                - generic [ref=e323]: Pistachio Latte
+                - generic [ref=e324]: $6.75
+              - generic [ref=e325]: House pistachio syrup, double espresso, whole milk.
+              - generic [ref=e326]: 240 cal
+            - button "Add Pistachio Latte to bag" [ref=e327]:
+              - generic [ref=e328]: +
+          - generic [ref=e329] [cursor=pointer]:
+            - generic [ref=e330]:
+              - generic [ref=e331]:
+                - generic [ref=e332]:
+                  - generic "Most loved" [ref=e333]
+                  - generic [ref=e334]: Brown Sugar Oat
+                - generic [ref=e335]: $6.50
+              - generic [ref=e336]: Brown sugar shaken espresso, oat milk, cinnamon.
+              - generic [ref=e337]: 220 cal
+            - button "Add Brown Sugar Oat to bag" [ref=e338]:
+              - generic [ref=e339]: +
+          - generic [ref=e340] [cursor=pointer]:
+            - generic [ref=e341]:
+              - generic [ref=e342]:
+                - generic [ref=e344]: Vanilla Honey
+                - generic [ref=e345]: $6.25
+              - generic [ref=e346]: Madagascar vanilla, raw honey, steamed milk.
+              - generic [ref=e347]: 200 cal
+            - button "Add Vanilla Honey to bag" [ref=e348]:
+              - generic [ref=e349]: +
+          - generic [ref=e350] [cursor=pointer]:
+            - generic [ref=e351]:
+              - generic [ref=e352]:
+                - generic [ref=e354]: Maple Pecan
+                - generic [ref=e355]: $6.75
+              - generic [ref=e356]: Real maple, toasted pecan, espresso, oat.
+              - generic [ref=e357]: 250 cal
+            - button "Add Maple Pecan to bag" [ref=e358]:
+              - generic [ref=e359]: +
+          - generic [ref=e360] [cursor=pointer]:
+            - generic [ref=e361]:
+              - generic [ref=e362]:
+                - generic [ref=e364]: Tiramisu Latte
+                - generic [ref=e365]: $7.00
+              - generic [ref=e366]: Espresso, mascarpone foam, cocoa dust, ladyfinger crumble.
+              - generic [ref=e367]: 320 cal
+            - button "Add Tiramisu Latte to bag" [ref=e368]:
+              - generic [ref=e369]: +
+      - generic [ref=e370]:
+        - generic [ref=e371]:
+          - heading "Matcha & Tea · ماتشا وشاي" [level=2] [ref=e372]:
+            - text: Matcha & Tea
+            - generic [ref=e373]: · ماتشا وشاي
+          - paragraph [ref=e374]: Ceremonial and slow. · 6 items
+        - generic [ref=e375]:
+          - generic [ref=e376] [cursor=pointer]:
+            - img "Ceremonial Matcha Latte" [ref=e378]
+            - generic [ref=e379]:
+              - generic [ref=e380]:
+                - generic [ref=e381]:
+                  - generic "Most loved" [ref=e382]
+                  - generic [ref=e383]: Ceremonial Matcha Latte
+                - generic [ref=e384]: $6.50
+              - generic [ref=e385]: Grade A Uji matcha, whisked in stone bowl, steamed milk.
+              - generic [ref=e386]: 180 cal
+            - button "Add Ceremonial Matcha Latte to bag" [ref=e387]:
+              - generic [ref=e388]: +
+          - generic [ref=e389] [cursor=pointer]:
+            - generic [ref=e390]:
+              - generic [ref=e391]:
+                - generic [ref=e393]: Rose Matcha
+                - generic [ref=e394]: $7.00
+              - generic [ref=e395]: Matcha, rose syrup, oat milk, dried petals.
+              - generic [ref=e396]: 200 cal
+            - button "Add Rose Matcha to bag" [ref=e397]:
+              - generic [ref=e398]: +
+          - generic [ref=e399] [cursor=pointer]:
+            - generic [ref=e400]:
+              - generic [ref=e401]:
+                - generic [ref=e403]: Pistachio Matcha
+                - generic [ref=e404]: $7.25
+              - generic [ref=e405]: House pistachio, matcha, whole milk, pistachio crumble.
+              - generic [ref=e406]: 260 cal
+            - button "Add Pistachio Matcha to bag" [ref=e407]:
+              - generic [ref=e408]: +
+          - generic [ref=e409] [cursor=pointer]:
+            - generic [ref=e410]:
+              - generic [ref=e411]:
+                - generic [ref=e413]: Hojicha Latte
+                - generic [ref=e414]: $6.00
+              - generic [ref=e415]: Roasted green tea, smoky, caffeine-light.
+              - generic [ref=e416]: 160 cal
+            - button "Add Hojicha Latte to bag" [ref=e417]:
+              - generic [ref=e418]: +
+          - generic [ref=e419] [cursor=pointer]:
+            - generic [ref=e420]:
+              - generic [ref=e421]:
+                - generic [ref=e423]: London Fog
+                - generic [ref=e424]: $5.75
+              - generic [ref=e425]: Earl Grey, vanilla, steamed milk.
+              - generic [ref=e426]: 170 cal
+            - button "Add London Fog to bag" [ref=e427]:
+              - generic [ref=e428]: +
+          - generic [ref=e429] [cursor=pointer]:
+            - generic [ref=e430]:
+              - generic [ref=e431]:
+                - generic [ref=e433]: Jasmine Pearl
+                - generic [ref=e434]: $5.25
+              - generic [ref=e435]: Hand-rolled jasmine green, served in glass pot.
+            - button "Add Jasmine Pearl to bag" [ref=e436]:
+              - generic [ref=e437]: +
+      - generic [ref=e438]:
+        - generic [ref=e439]:
+          - heading "Cold Brew & Iced · قهوة باردة" [level=2] [ref=e440]:
+            - text: Cold Brew & Iced
+            - generic [ref=e441]: · قهوة باردة
+          - paragraph [ref=e442]: Twenty-four hour steep. · 5 items
+        - generic [ref=e443]:
+          - generic [ref=e444] [cursor=pointer]:
+            - generic [ref=e445]:
+              - generic [ref=e446]:
+                - generic [ref=e447]:
+                  - generic "Most loved" [ref=e448]
+                  - generic [ref=e449]: Cold Brew
+                - generic [ref=e450]: $5.25
+              - generic [ref=e451]: Slow-steeped 24 hours, served black.
+              - generic [ref=e452]: 5 cal
+            - button "Add Cold Brew to bag" [ref=e453]:
+              - generic [ref=e454]: +
+          - generic [ref=e455] [cursor=pointer]:
+            - generic [ref=e456]:
+              - generic [ref=e457]:
+                - generic [ref=e458]:
+                  - generic [ref=e459]: Nitro Cold Brew
+                  - generic [ref=e460]: On Tap
+                - generic [ref=e461]: $6.00
+              - generic [ref=e462]: Cold brew on tap, cascading nitrogen.
+              - generic [ref=e463]: 5 cal
+            - button "Add Nitro Cold Brew to bag" [ref=e464]:
+              - generic [ref=e465]: +
+          - generic [ref=e466] [cursor=pointer]:
+            - generic [ref=e467]:
+              - generic [ref=e468]:
+                - generic [ref=e470]: Iced Latte
+                - generic [ref=e471]: $5.75
+              - generic [ref=e472]: Double espresso, cold milk, ice.
+              - generic [ref=e473]: 130 cal
+            - button "Add Iced Latte to bag" [ref=e474]:
+              - generic [ref=e475]: +
+          - generic [ref=e476] [cursor=pointer]:
+            - generic [ref=e477]:
+              - generic [ref=e478]:
+                - generic [ref=e480]: Vietnamese
+                - generic [ref=e481]: $6.25
+              - generic [ref=e482]: Phin-dripped dark roast, sweetened condensed milk.
+              - generic [ref=e483]: 220 cal
+            - button "Add Vietnamese to bag" [ref=e484]:
+              - generic [ref=e485]: +
+          - generic [ref=e486] [cursor=pointer]:
+            - generic [ref=e487]:
+              - generic [ref=e488]:
+                - generic [ref=e490]: Horchata Cold Brew
+                - generic [ref=e491]: $6.50
+              - generic [ref=e492]: Cold brew, rice horchata, cinnamon.
+              - generic [ref=e493]: 200 cal
+            - button "Add Horchata Cold Brew to bag" [ref=e494]:
+              - generic [ref=e495]: +
+      - generic [ref=e496]:
+        - generic [ref=e497]:
+          - heading "Refreshers · منعشات" [level=2] [ref=e498]:
+            - text: Refreshers
+            - generic [ref=e499]: · منعشات
+          - paragraph [ref=e500]: Sparkling, fruit-forward. · 4 items
+        - generic [ref=e501]:
+          - generic [ref=e502] [cursor=pointer]:
+            - generic [ref=e503]:
+              - generic [ref=e504]:
+                - generic [ref=e505]:
+                  - generic "Most loved" [ref=e506]
+                  - generic [ref=e507]: Mango Dragonfruit
+                - generic [ref=e508]: $5.75
+              - generic [ref=e509]: Real mango, dragonfruit cubes, lime, sparkling.
+              - generic [ref=e510]: 110 cal
+            - button "Add Mango Dragonfruit to bag" [ref=e511]:
+              - generic [ref=e512]: +
+          - generic [ref=e513] [cursor=pointer]:
+            - generic [ref=e514]:
+              - generic [ref=e515]:
+                - generic [ref=e517]: Peach Passion
+                - generic [ref=e518]: $5.75
+              - generic [ref=e519]: White peach, passion fruit, mint.
+              - generic [ref=e520]: 100 cal
+            - button "Add Peach Passion to bag" [ref=e521]:
+              - generic [ref=e522]: +
+          - generic [ref=e523] [cursor=pointer]:
+            - generic [ref=e524]:
+              - generic [ref=e525]:
+                - generic [ref=e527]: Strawberry Rose
+                - generic [ref=e528]: $5.75
+              - generic [ref=e529]: Fresh strawberry, rose syrup, sparkling water.
+              - generic [ref=e530]: 95 cal
+            - button "Add Strawberry Rose to bag" [ref=e531]:
+              - generic [ref=e532]: +
+          - generic [ref=e533] [cursor=pointer]:
+            - generic [ref=e534]:
+              - generic [ref=e535]:
+                - generic [ref=e537]: Blueberry Lavender
+                - generic [ref=e538]: $5.75
+              - generic [ref=e539]: Wild blueberry, lavender, lemonade.
+              - generic [ref=e540]: 130 cal
+            - button "Add Blueberry Lavender to bag" [ref=e541]:
+              - generic [ref=e542]: +
+      - generic [ref=e543]:
+        - generic [ref=e544]:
+          - heading "Frappes · فرابيه" [level=2] [ref=e545]:
+            - text: Frappes
+            - generic [ref=e546]: · فرابيه
+          - paragraph [ref=e547]: Indulgent, blended. · 4 items
+        - generic [ref=e548]:
+          - generic [ref=e549] [cursor=pointer]:
+            - generic [ref=e550]:
+              - generic [ref=e551]:
+                - generic [ref=e553]: Caramel Frappé
+                - generic [ref=e554]: $6.75
+              - generic [ref=e555]: Espresso, caramel, milk, ice, whipped cream.
+              - generic [ref=e556]: 420 cal
+            - button "Add Caramel Frappé to bag" [ref=e557]:
+              - generic [ref=e558]: +
+          - generic [ref=e559] [cursor=pointer]:
+            - generic [ref=e560]:
+              - generic [ref=e561]:
+                - generic [ref=e563]: Mocha Frappé
+                - generic [ref=e564]: $6.75
+              - generic [ref=e565]: Espresso, chocolate, milk, blended cold.
+              - generic [ref=e566]: 440 cal
+            - button "Add Mocha Frappé to bag" [ref=e567]:
+              - generic [ref=e568]: +
+          - generic [ref=e569] [cursor=pointer]:
+            - generic [ref=e570]:
+              - generic [ref=e571]:
+                - generic [ref=e572]:
+                  - generic "Most loved" [ref=e573]
+                  - generic [ref=e574]: Biscoff Frappé
+                - generic [ref=e575]: $7.25
+              - generic [ref=e576]: Speculoos cookie, espresso, milk, biscoff drizzle.
+              - generic [ref=e577]: 480 cal
+            - button "Add Biscoff Frappé to bag" [ref=e578]:
+              - generic [ref=e579]: +
+          - generic [ref=e580] [cursor=pointer]:
+            - generic [ref=e581]:
+              - generic [ref=e582]:
+                - generic [ref=e584]: Matcha Frappé
+                - generic [ref=e585]: $6.75
+              - generic [ref=e586]: Matcha, milk, vanilla, blended.
+              - generic [ref=e587]: 360 cal
+            - button "Add Matcha Frappé to bag" [ref=e588]:
+              - generic [ref=e589]: +
+      - generic [ref=e590]:
+        - generic [ref=e591]:
+          - heading "Smoothies · سموذي" [level=2] [ref=e592]:
+            - text: Smoothies
+            - generic [ref=e593]: · سموذي
+          - paragraph [ref=e594]: Whole-fruit, no compromise. · 3 items
+        - generic [ref=e595]:
+          - generic [ref=e596] [cursor=pointer]:
+            - generic [ref=e597]:
+              - generic [ref=e598]:
+                - generic [ref=e600]: Green Glow
+                - generic [ref=e601]: $7.50
+              - generic [ref=e602]: Spinach, banana, mango, ginger, coconut water.
+              - generic [ref=e603]: 240 cal
+            - button "Add Green Glow to bag" [ref=e604]:
+              - generic [ref=e605]: +
+          - generic [ref=e606] [cursor=pointer]:
+            - generic [ref=e607]:
+              - generic [ref=e608]:
+                - generic [ref=e610]: Berry Bliss
+                - generic [ref=e611]: $7.50
+              - generic [ref=e612]: Mixed berries, banana, yogurt, honey.
+              - generic [ref=e613]: 280 cal
+            - button "Add Berry Bliss to bag" [ref=e614]:
+              - generic [ref=e615]: +
+          - generic [ref=e616] [cursor=pointer]:
+            - generic [ref=e617]:
+              - generic [ref=e618]:
+                - generic [ref=e620]: Tropic
+                - generic [ref=e621]: $7.50
+              - generic [ref=e622]: Pineapple, mango, passion fruit, coconut milk.
+              - generic [ref=e623]: 260 cal
+            - button "Add Tropic to bag" [ref=e624]:
+              - generic [ref=e625]: +
+      - generic [ref=e626]:
+        - generic [ref=e627]:
+          - heading "Waffles & Crepes · وافل وكريب" [level=2] [ref=e628]:
+            - text: Waffles & Crepes
+            - generic [ref=e629]: · وافل وكريب
+          - paragraph [ref=e630]: Brunch, all day. · 6 items
+        - generic [ref=e631]:
+          - generic [ref=e632] [cursor=pointer]:
+            - img "Belgian Waffle" [ref=e634]
+            - generic [ref=e635]:
+              - generic [ref=e636]:
+                - generic [ref=e637]:
+                  - generic "Most loved" [ref=e638]
+                  - generic [ref=e639]: Belgian Waffle
+                - generic [ref=e640]: $11.50
+              - generic [ref=e641]: Liège pearl-sugar waffle, whipped cream, strawberry, maple.
+              - generic [ref=e642]: 540 cal
+            - button "Add Belgian Waffle to bag" [ref=e643]:
+              - generic [ref=e644]: +
+          - generic [ref=e645] [cursor=pointer]:
+            - generic [ref=e646]:
+              - generic [ref=e647]:
+                - generic [ref=e649]: Nutella Banana Waffle
+                - generic [ref=e650]: $12.50
+              - generic [ref=e651]: Belgian waffle, Nutella, banana, hazelnut crumble.
+              - generic [ref=e652]: 640 cal
+            - button "Add Nutella Banana Waffle to bag" [ref=e653]:
+              - generic [ref=e654]: +
+          - generic [ref=e655] [cursor=pointer]:
+            - img "Kunafa Waffle" [ref=e657]
+            - generic [ref=e658]:
+              - generic [ref=e659]:
+                - generic [ref=e660]:
+                  - generic [ref=e661]: Kunafa Waffle
+                  - generic [ref=e662]: Signature
+                - generic [ref=e663]: $13.50
+              - generic [ref=e664]: Crispy kunafa-topped waffle, sweet cheese, rose syrup, pistachio.
+              - generic [ref=e665]: 620 cal
+            - button "Add Kunafa Waffle to bag" [ref=e666]:
+              - generic [ref=e667]: +
+          - generic [ref=e668] [cursor=pointer]:
+            - generic [ref=e669]:
+              - generic [ref=e670]:
+                - generic [ref=e672]: Nutella Crepe
+                - generic [ref=e673]: $10.50
+              - generic [ref=e674]: Thin French crepe, Nutella, strawberry, powdered sugar.
+              - generic [ref=e675]: 480 cal
+            - button "Add Nutella Crepe to bag" [ref=e676]:
+              - generic [ref=e677]: +
+          - generic [ref=e678] [cursor=pointer]:
+            - generic [ref=e679]:
+              - generic [ref=e680]:
+                - generic [ref=e682]: Lotus Crepe
+                - generic [ref=e683]: $11.00
+              - generic [ref=e684]: Crepe, Lotus Biscoff spread, biscuit crumble, vanilla cream.
+              - generic [ref=e685]: 510 cal
+            - button "Add Lotus Crepe to bag" [ref=e686]:
+              - generic [ref=e687]: +
+          - generic [ref=e688] [cursor=pointer]:
+            - generic [ref=e689]:
+              - generic [ref=e690]:
+                - generic [ref=e692]: Savory Crepe
+                - generic [ref=e693]: $12.00
+              - generic [ref=e694]: Buckwheat crepe, ham, gruyère, fried egg.
+              - generic [ref=e695]: 460 cal
+            - button "Add Savory Crepe to bag" [ref=e696]:
+              - generic [ref=e697]: +
+      - generic [ref=e698]:
+        - generic [ref=e699]:
+          - heading "Sandwiches · سندويشات" [level=2] [ref=e700]:
+            - text: Sandwiches
+            - generic [ref=e701]: · سندويشات
+          - paragraph [ref=e702]: Fresh, pressed, layered. · 5 items
+        - generic [ref=e703]:
+          - generic [ref=e704] [cursor=pointer]:
+            - generic [ref=e705]:
+              - generic [ref=e706]:
+                - generic [ref=e708]: Pressed Caprese
+                - generic [ref=e709]: $11.50
+              - generic [ref=e710]: Heirloom tomato, fresh mozzarella, basil, balsamic, ciabatta.
+              - generic [ref=e711]: 520 cal
+            - button "Add Pressed Caprese to bag" [ref=e712]:
+              - generic [ref=e713]: +
+          - generic [ref=e714] [cursor=pointer]:
+            - generic [ref=e715]:
+              - generic [ref=e716]:
+                - generic [ref=e717]:
+                  - generic "Most loved" [ref=e718]
+                  - generic [ref=e719]: Turkey Pesto
+                - generic [ref=e720]: $12.50
+              - generic [ref=e721]: Smoked turkey, basil pesto, provolone, sun-dried tomato.
+              - generic [ref=e722]: 580 cal
+            - button "Add Turkey Pesto to bag" [ref=e723]:
+              - generic [ref=e724]: +
+          - generic [ref=e725] [cursor=pointer]:
+            - generic [ref=e726]:
+              - generic [ref=e727]:
+                - generic [ref=e729]: Smoked Salmon Bagel
+                - generic [ref=e730]: $13.50
+              - generic [ref=e731]: Everything bagel, cream cheese, cured salmon, capers, red onion, dill.
+              - generic [ref=e732]: 480 cal
+            - button "Add Smoked Salmon Bagel to bag" [ref=e733]:
+              - generic [ref=e734]: +
+          - generic [ref=e735] [cursor=pointer]:
+            - generic [ref=e736]:
+              - generic [ref=e737]:
+                - generic [ref=e739]: Avocado Toast
+                - generic [ref=e740]: $11.00
+              - generic [ref=e741]: Sourdough, smashed avocado, chili crisp, soft egg, microgreens.
+              - generic [ref=e742]: 420 cal
+            - button "Add Avocado Toast to bag" [ref=e743]:
+              - generic [ref=e744]: +
+          - generic [ref=e745] [cursor=pointer]:
+            - generic [ref=e746]:
+              - generic [ref=e747]:
+                - generic [ref=e748]:
+                  - generic [ref=e749]: Chicken Shawarma Wrap
+                  - generic [ref=e750]: House
+                - generic [ref=e751]: $13.50
+              - generic [ref=e752]: Spiced chicken, garlic toum, pickled turnip, herbs, lavash.
+              - generic [ref=e753]: 620 cal
+            - button "Add Chicken Shawarma Wrap to bag" [ref=e754]:
+              - generic [ref=e755]: +
+      - generic [ref=e756]:
+        - generic [ref=e757]:
+          - heading "Pastries · حلويات" [level=2] [ref=e758]:
+            - text: Pastries
+            - generic [ref=e759]: · حلويات
+          - paragraph [ref=e760]: Daily from our kitchen. · 7 items
+        - generic [ref=e761]:
+          - generic [ref=e762] [cursor=pointer]:
+            - img "Baklava (3 pcs)" [ref=e764]
+            - generic [ref=e765]:
+              - generic [ref=e766]:
+                - generic [ref=e767]:
+                  - generic "Most loved" [ref=e768]
+                  - generic [ref=e769]: Baklava (3 pcs)
+                - generic [ref=e770]: $6.50
+              - generic [ref=e771]: Phyllo, walnut, pistachio, orange-blossom syrup.
+              - generic [ref=e772]: 320 cal
+            - button "Add Baklava (3 pcs) to bag" [ref=e773]:
+              - generic [ref=e774]: +
+          - generic [ref=e775] [cursor=pointer]:
+            - generic [ref=e776]:
+              - generic [ref=e777]:
+                - generic [ref=e779]: Kunafa
+                - generic [ref=e780]: $8.50
+              - generic [ref=e781]: Shredded phyllo, sweet cheese, rose syrup, pistachio.
+              - generic [ref=e782]: 380 cal
+            - button "Add Kunafa to bag" [ref=e783]:
+              - generic [ref=e784]: +
+          - generic [ref=e785] [cursor=pointer]:
+            - generic [ref=e786]:
+              - generic [ref=e787]:
+                - generic [ref=e789]: Ma'amoul (2 pcs)
+                - generic [ref=e790]: $5.50
+              - generic [ref=e791]: Semolina shortbread, date or pistachio filling.
+              - generic [ref=e792]: 220 cal
+            - button "Add Ma'amoul (2 pcs) to bag" [ref=e793]:
+              - generic [ref=e794]: +
+          - generic [ref=e795] [cursor=pointer]:
+            - generic [ref=e796]:
+              - generic [ref=e797]:
+                - generic [ref=e799]: Basbousa
+                - generic [ref=e800]: $5.00
+              - generic [ref=e801]: Semolina cake, coconut, simple syrup, almond center.
+              - generic [ref=e802]: 280 cal
+            - button "Add Basbousa to bag" [ref=e803]:
+              - generic [ref=e804]: +
+          - generic [ref=e805] [cursor=pointer]:
+            - generic [ref=e806]:
+              - generic [ref=e807]:
+                - generic [ref=e809]: Butter Croissant
+                - generic [ref=e810]: $4.50
+              - generic [ref=e811]: House-laminated, 81-layer, golden.
+              - generic [ref=e812]: 280 cal
+            - button "Add Butter Croissant to bag" [ref=e813]:
+              - generic [ref=e814]: +
+          - generic [ref=e815] [cursor=pointer]:
+            - generic [ref=e816]:
+              - generic [ref=e817]:
+                - generic [ref=e819]: Pain au Chocolat
+                - generic [ref=e820]: $5.00
+              - generic [ref=e821]: Croissant dough, dark chocolate batons.
+              - generic [ref=e822]: 340 cal
+            - button "Add Pain au Chocolat to bag" [ref=e823]:
+              - generic [ref=e824]: +
+          - generic [ref=e825] [cursor=pointer]:
+            - generic [ref=e826]:
+              - generic [ref=e827]:
+                - generic [ref=e829]: Almond Croissant
+                - generic [ref=e830]: $5.50
+              - generic [ref=e831]: Twice-baked, almond cream, sliced almonds.
+              - generic [ref=e832]: 410 cal
+            - button "Add Almond Croissant to bag" [ref=e833]:
+              - generic [ref=e834]: +
+  - contentinfo [ref=e836]:
+    - generic [ref=e837]:
+      - generic [ref=e838]:
+        - generic [ref=e839]:
+          - generic [ref=e840]: ✦
+          - text: Aroma
+        - generic [ref=e841]: Where Arabia meets the artisan · ضيافة
+        - paragraph [ref=e842]: A sunlit coffee lounge in southwest Fort Wayne — opened 2026.
+      - generic [ref=e843]:
+        - heading "Visit" [level=4] [ref=e844]
+        - list [ref=e845]:
+          - listitem [ref=e846]: 1361 W Hamilton Rd S
+          - listitem [ref=e847]: Fort Wayne, IN 46814
+          - listitem [ref=e848]:
+            - link "(260) 555-0142" [ref=e849] [cursor=pointer]:
+              - /url: tel:+12605550142
+          - listitem [ref=e850]:
+            - link "hello@aromalounge.coffee" [ref=e851] [cursor=pointer]:
+              - /url: mailto:hello@aromalounge.coffee
+      - generic [ref=e852]:
+        - heading "Explore" [level=4] [ref=e853]
+        - list [ref=e854]:
+          - listitem [ref=e855]:
+            - link "Home" [ref=e856] [cursor=pointer]:
+              - /url: index.html
+          - listitem [ref=e857]:
+            - link "Order Online" [ref=e858] [cursor=pointer]:
+              - /url: order.html
+          - listitem [ref=e859]:
+            - link "Hours & Map" [ref=e860] [cursor=pointer]:
+              - /url: index.html#visit
+      - generic [ref=e861]:
+        - heading "Follow" [level=4] [ref=e862]
+        - list [ref=e863]:
+          - listitem [ref=e864]:
+            - link "Instagram" [ref=e865] [cursor=pointer]:
+              - /url: https://instagram.com/aromaloungecoffee
+          - listitem [ref=e866]:
+            - link "TikTok" [ref=e867] [cursor=pointer]:
+              - /url: https://tiktok.com/@aromaloungecoffee
+          - listitem [ref=e868]:
+            - link "Facebook" [ref=e869] [cursor=pointer]:
+              - /url: https://facebook.com/aromaloungecoffee
+          - listitem [ref=e870]:
+            - link "Staff Portal" [ref=e871] [cursor=pointer]:
+              - /url: admin/
+    - generic [ref=e872]:
+      - generic [ref=e873]: © 2026 Aroma Lounge · Fort Wayne, Indiana
+      - generic [ref=e874]: Demo · prices illustrative
+  - dialog [ref=e875]:
+    - generic [ref=e876]:
+      - generic [ref=e877]:
+        - generic [ref=e878]: Item
+        - generic [ref=e879]: Starting at $0.00
+      - button [ref=e880] [cursor=pointer]: ×
+  - dialog [ref=e883]:
+    - generic [ref=e884]:
+      - generic [ref=e885]:
+        - generic [ref=e886]: Your Bag · سلتك
+        - generic [ref=e887]: Pickup · ready in 10–15 min
+      - button [ref=e888] [cursor=pointer]: ×
+    - generic [ref=e891]:
+      - generic [ref=e892]:
+        - generic [ref=e893]: Subtotal
+        - generic [ref=e894]: $0.00
+      - link [ref=e895] [cursor=pointer]:
+        - /url: order.html
+        - text: Checkout
+      - paragraph [ref=e896]: Demo only · pay at pickup · tax added at checkout
+  - button "View your bag":
+    - text: ✦
+    - generic: "0"
+    - generic: View Bag
+    - generic: $0.00
+  - generic [ref=e898]: ✦
