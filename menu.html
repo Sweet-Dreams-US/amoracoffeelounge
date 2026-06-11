@@ -4,23 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu · Aroma Lounge</title>
-  <meta name="description" content="The full Aroma Lounge menu. Order ahead, customize every drink, and pick up at Hamilton & Illinois in southwest Fort Wayne." />
+  <meta name="description" content="The full Aroma Lounge menu. Qahwa, signature lattes, matcha, kunafa waffles, and more — tap + to add anything to your bag and order ahead." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@400;500;600;700&family=Reem+Kufi:wght@400;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/menu.css" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F5EBD8'/%3E%3Ctext x='50' y='72' font-family='Cormorant Garamond,serif' font-style='italic' font-size='80' fill='%23B58A4B' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBF7EF'/%3E%3Cg fill='none' stroke='%23A87B2F' stroke-width='5'%3E%3Crect x='30' y='30' width='40' height='40'/%3E%3Crect x='30' y='30' width='40' height='40' transform='rotate(45 50 50)'/%3E%3C/g%3E%3C/svg%3E" />
 </head>
 <body>
 
   <!-- Navigation -->
   <nav class="nav scrolled" id="nav">
     <a href="index.html" class="nav-brand">
-      <span class="nav-tagline">Hamilton &amp; Illinois</span>
-      <span class="nav-wordmark"><span class="mark">✦</span>Aroma</span>
+      <span class="nav-tagline">Hamilton &amp; Illinois · Fort Wayne</span>
+      <span class="nav-wordmark"><span class="mark">✦</span>Aroma Lounge</span>
     </a>
     <div class="nav-links" id="nav-links">
       <a href="index.html" class="nav-link">Home</a>
@@ -37,14 +37,15 @@
     </button>
   </nav>
 
-  <!-- Menu Header -->
+  <!-- Menu -->
   <div class="menu-page">
     <div class="container">
-      <div class="menu-header fade-up">
-        <span class="pill pill-bronze">The Menu</span>
-        <h1 class="display">Made <span class="serif">to order.</span></h1>
-        <p>Single-origin espresso, signature lattes built on house syrups, traditional Arabic coffee service, breakfast and pastries all day. Tap the <strong style="color:var(--ink);">+</strong> next to anything to customize and add it to your bag.</p>
-      </div>
+      <header class="menu-header fade-up">
+        <span class="kufi">The Menu <span class="ar">· القائمة</span></span>
+        <h1 class="h-display" style="margin-top: 0.75rem;">Made to order</h1>
+        <p class="lead">Qahwa from the dallah, lattes on house syrups, kunafa from the kitchen. Tap the <strong style="color: var(--palm);">+</strong> to add anything straight to your bag — tap the row to customize first.</p>
+        <span class="concierge" style="margin-top: 1.25rem;">Ready in about eight minutes</span>
+      </header>
     </div>
 
     <!-- Sticky category nav -->
@@ -57,13 +58,14 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
+  <div class="footer-scallop" aria-hidden="true"></div>
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-brand-block">
-        <div class="footer-brand">Aroma<span class="dot">.</span></div>
-        <div class="footer-tag">Where Arabia meets the artisan</div>
-        <p>A premium coffee lounge in southwest Fort Wayne — opening 2026.</p>
+        <div class="footer-brand"><span class="mark">✦</span>Aroma</div>
+        <div class="footer-tag">Where Arabia meets the artisan · ضيافة</div>
+        <p>A sunlit coffee lounge in southwest Fort Wayne — opened 2026.</p>
       </div>
       <div class="footer-col">
         <h4>Visit</h4>
@@ -78,7 +80,6 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="menu.html">Menu</a></li>
           <li><a href="order.html">Order Online</a></li>
           <li><a href="index.html#visit">Hours &amp; Map</a></li>
         </ul>
@@ -94,8 +95,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Aroma Lounge · Fort Wayne, Indiana</span>
-      <span>Demo site · prices illustrative</span>
+      <span>© <span data-year>2026</span> Aroma Lounge · Fort Wayne, Indiana</span>
+      <span>Demo · prices illustrative</span>
     </div>
   </footer>
 
@@ -119,21 +120,19 @@
   <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-label="Your bag" aria-hidden="true">
     <div class="cart-header">
       <div>
-        <div class="cart-title">Your Bag</div>
+        <div class="cart-title">Your Bag <span class="ar" style="color: var(--brass-bright);">· سلتك</span></div>
         <div class="cart-sub">Pickup · ready in 10–15 min</div>
       </div>
       <button id="cart-close" class="cart-close" aria-label="Close cart">×</button>
     </div>
+    <div class="cart-scallop" aria-hidden="true"></div>
     <div id="cart-body" class="cart-body"></div>
     <div id="cart-footer" class="cart-footer">
       <div class="cart-total">
         <span class="cart-total-label">Subtotal</span>
         <span id="cart-total" class="cart-total-amount">$0.00</span>
       </div>
-      <a href="order.html" class="btn btn-primary btn-arrow" style="width:100%; justify-content:center;">
-        Checkout
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
-      </a>
+      <a href="order.html" class="btn btn-primary btn-block">Checkout</a>
       <p class="cart-note">Demo only · pay at pickup · tax added at checkout</p>
     </div>
   </aside>
@@ -147,7 +146,7 @@
 
   <!-- Toast -->
   <div id="toast" class="toast">
-    <span class="check">✓</span>
+    <span class="check">✦</span>
     <span class="text"></span>
   </div>
 

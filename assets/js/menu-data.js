@@ -4,18 +4,18 @@
    ======================================================================== */
 
 window.AROMA_CATEGORIES = [
-  { id: 'signature',  name: 'Signature Lounge',  blurb: 'House compositions, made only here.', icon: '✦' },
-  { id: 'espresso',   name: 'Espresso Bar',      blurb: 'The pure pursuit.',                   icon: '☕' },
-  { id: 'arabic',     name: 'Arabic Tradition',  blurb: 'Centuries of ritual.',                icon: '⌘' },
-  { id: 'lattes',     name: 'Specialty Lattes',  blurb: 'Reimagined classics.',                icon: '◐' },
-  { id: 'matcha',     name: 'Matcha & Tea',      blurb: 'Ceremonial and slow.',                icon: '◉' },
-  { id: 'cold',       name: 'Cold Brew & Iced',  blurb: 'Twenty-four hour steep.',             icon: '❉' },
-  { id: 'refreshers', name: 'Refreshers',        blurb: 'Sparkling, fruit-forward.',           icon: '✺' },
-  { id: 'frappes',    name: 'Frappes',           blurb: 'Indulgent, blended.',                 icon: '❋' },
-  { id: 'smoothies',  name: 'Smoothies',         blurb: 'Whole-fruit, no compromise.',         icon: '◈' },
-  { id: 'waffles',    name: 'Waffles & Crepes',  blurb: 'Brunch, all day.',                    icon: '❀' },
-  { id: 'sandwiches', name: 'Sandwiches',        blurb: 'Fresh, pressed, layered.',            icon: '▤' },
-  { id: 'pastries',   name: 'Pastries',          blurb: 'Daily from our kitchen.',             icon: '✿' },
+  { id: 'signature',  name: 'Signature Lounge',  ar: 'التوقيع',     blurb: 'House compositions, made only here.', icon: '✦' },
+  { id: 'espresso',   name: 'Espresso Bar',      ar: 'إسبريسو',     blurb: 'The pure pursuit.',                   icon: '☕' },
+  { id: 'arabic',     name: 'Arabic Tradition',  ar: 'قهوة عربية',  blurb: 'Centuries of ritual.',                icon: '⌘' },
+  { id: 'lattes',     name: 'Specialty Lattes',  ar: 'لاتيه',       blurb: 'Reimagined classics.',                icon: '◐' },
+  { id: 'matcha',     name: 'Matcha & Tea',      ar: 'ماتشا وشاي',  blurb: 'Ceremonial and slow.',                icon: '◉' },
+  { id: 'cold',       name: 'Cold Brew & Iced',  ar: 'قهوة باردة',  blurb: 'Twenty-four hour steep.',             icon: '❉' },
+  { id: 'refreshers', name: 'Refreshers',        ar: 'منعشات',      blurb: 'Sparkling, fruit-forward.',           icon: '✺' },
+  { id: 'frappes',    name: 'Frappes',           ar: 'فرابيه',      blurb: 'Indulgent, blended.',                 icon: '❋' },
+  { id: 'smoothies',  name: 'Smoothies',         ar: 'سموذي',       blurb: 'Whole-fruit, no compromise.',         icon: '◈' },
+  { id: 'waffles',    name: 'Waffles & Crepes',  ar: 'وافل وكريب',  blurb: 'Brunch, all day.',                    icon: '❀' },
+  { id: 'sandwiches', name: 'Sandwiches',        ar: 'سندويشات',    blurb: 'Fresh, pressed, layered.',            icon: '▤' },
+  { id: 'pastries',   name: 'Pastries',          ar: 'حلويات',      blurb: 'Daily from our kitchen.',             icon: '✿' },
 ];
 
 /* Customization templates by category */
@@ -139,7 +139,7 @@ window.AROMA_MENU = [
   /* ---------- SIGNATURE ---------- */
   { id: 'aroma-latte', cat: 'signature', name: 'The Aroma',
     desc: 'Our signature — double espresso, oat milk, rose-cardamom syrup, dusted with rose petals and crushed pistachio.',
-    price: 7.25, calories: 220, img: 'rose-latte', badge: 'Most Loved', popular: true,
+    price: 7.25, calories: 220, img: 'day-rose-latte', badge: 'Most Loved', popular: true,
     customizations: DRINK_CUSTOMIZATIONS, },
   { id: 'gold-dust', cat: 'signature', name: 'Gold Dust Latte',
     desc: 'Saffron-infused espresso, steamed whole milk, finished with edible 24-karat gold leaf.',
@@ -185,7 +185,7 @@ window.AROMA_MENU = [
   /* ---------- ARABIC TRADITION ---------- */
   { id: 'qahwa', cat: 'arabic', name: 'Qahwa (Arabic Coffee)',
     desc: 'Lightly roasted bean, cardamom, saffron. Served in finjan with dates.',
-    price: 6.50, calories: 25, img: 'arabic-service', badge: 'Tradition',
+    price: 6.50, calories: 25, img: 'day-arabic-service', badge: 'Tradition',
     customizations: ARABIC_CUSTOMIZATIONS, },
   { id: 'turkish', cat: 'arabic', name: 'Turkish Coffee',
     desc: 'Finely ground, double-boiled in cezve, unfiltered.',
@@ -316,7 +316,7 @@ window.AROMA_MENU = [
     price: 12.50, calories: 640, customizations: FOOD_CUSTOMIZATIONS, },
   { id: 'kunafa-waffle', cat: 'waffles', name: 'Kunafa Waffle',
     desc: 'Crispy kunafa-topped waffle, sweet cheese, rose syrup, pistachio.',
-    price: 13.50, calories: 620, badge: 'Signature', customizations: FOOD_CUSTOMIZATIONS, },
+    price: 13.50, calories: 620, img: 'day-kunafa-waffle', badge: 'Signature', customizations: FOOD_CUSTOMIZATIONS, },
   { id: 'nutella-crepe', cat: 'waffles', name: 'Nutella Crepe',
     desc: 'Thin French crepe, Nutella, strawberry, powdered sugar.',
     price: 10.50, calories: 480, customizations: FOOD_CUSTOMIZATIONS, },
@@ -347,7 +347,7 @@ window.AROMA_MENU = [
   /* ---------- PASTRIES ---------- */
   { id: 'baklava',     cat: 'pastries', name: 'Baklava (3 pcs)',
     desc: 'Phyllo, walnut, pistachio, orange-blossom syrup.',
-    price: 6.50, calories: 320, img: 'baklava', popular: true, customizations: [], },
+    price: 6.50, calories: 320, img: 'day-baklava', popular: true, customizations: [], },
   { id: 'kunafa',      cat: 'pastries', name: 'Kunafa',
     desc: 'Shredded phyllo, sweet cheese, rose syrup, pistachio.',
     price: 8.50, calories: 380, customizations: [], },

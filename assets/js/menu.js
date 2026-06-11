@@ -1,14 +1,16 @@
 /* ==========================================================================
-   AROMA LOUNGE — Menu + cart (light theme, Mocha-style ordering)
+   AROMA LOUNGE — "The Sun Court" menu + cart
+   Dotted-leader rows · always-visible + · customize sheet · cart drawer
    ========================================================================== */
 
 (() => {
   'use strict';
 
   const CART_KEY = 'aroma_cart';
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ----------------------------------------------------------------------
-     CART STATE (shared between menu page, drawer, and order page)
+     CART STATE (shared across pages)
      ---------------------------------------------------------------------- */
   const Cart = {
     read() { try { return JSON.parse(localStorage.getItem(CART_KEY)) || { items: [] }; } catch { return { items: [] }; } },
@@ -46,7 +48,7 @@
 
   function serializeSelections(sel) {
     const keys = Object.keys(sel).sort();
-    return keys.map(k => k + ':' + (Array.isArray(sel[k]) ? sel[k].sort().join(',') : sel[k])).join('|');
+    return keys.map(k => k + ':' + (Array.isArray(sel[k]) ? sel[k].slice().sort().join(',') : sel[k])).join('|');
   }
   function defaultSelections(item) {
     const sel = {};
@@ -95,13 +97,12 @@
   }
 
   /* ----------------------------------------------------------------------
-     Sync nav cart count (works on every page)
+     Nav cart count (every page)
      ---------------------------------------------------------------------- */
   function syncNavCount() {
     const c = Cart.count();
     document.querySelectorAll('[data-cart-count]').forEach(el => {
       el.textContent = c;
-      el.classList.toggle('hidden', c === 0);
       el.style.display = c === 0 ? 'none' : '';
     });
   }
@@ -110,32 +111,82 @@
   window.addEventListener('storage', e => { if (e.key === CART_KEY) syncNavCount(); });
 
   /* ----------------------------------------------------------------------
-     Menu page rendering (only runs if #menu-root present)
+     Flying brass dot — add-to-cart confirmation
+     ---------------------------------------------------------------------- */
+  function flyDot(fromEl) {
+    if (REDUCED || !fromEl) return;
+    const fab = document.getElementById('cart-fab');
+    const target = (fab && fab.classList.contains('visible')) ? fab : document.querySelector('.nav-cta');
+    if (!target) return;
+    const a = fromEl.getBoundingClientRect();
+    const b = target.getBoundingClientRect();
+    const dot = document.createElement('div');
+    dot.className = 'fly-dot';
+    dot.style.left = (a.left + a.width / 2 - 5) + 'px';
+    dot.style.top = (a.top + a.height / 2 - 5) + 'px';
+    document.body.appendChild(dot);
+    const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
+    const dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+    const anim = dot.animate([
+      { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+      { transform: `translate(${dx * 0.5}px, ${dy * 0.5 - 40}px) scale(1.1)`, opacity: 1, offset: 0.5 },
+      { transform: `translate(${dx}px, ${dy}px) scale(0.4)`, opacity: 0.6 },
+    ], { duration: 450, easing: 'cubic-bezier(0.22, 0.9, 0.3, 1)' });
+    anim.onfinish = () => dot.remove();
+  }
+
+  function flashAdded(btn) {
+    if (!btn) return;
+    btn.classList.add('added');
+    const ic = btn.querySelector('.ic');
+    if (ic) ic.textContent = '✓';
+    setTimeout(() => { btn.classList.remove('added'); if (ic) ic.textContent = '+'; }, 800);
+  }
+
+  /* ----------------------------------------------------------------------
+     Quick-add buttons (hero carte on the home page)
+     ---------------------------------------------------------------------- */
+  document.querySelectorAll('[data-quick-add]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = (window.AROMA_MENU || []).find(i => i.id === btn.dataset.quickAdd);
+      if (!item) return;
+      Cart.add(item, defaultSelections(item), 1);
+      flashAdded(btn);
+      flyDot(btn);
+      bumpFab();
+      showToast(`${item.name} · added`);
+    });
+  });
+
+  /* ----------------------------------------------------------------------
+     Menu page rendering
      ---------------------------------------------------------------------- */
   const menuRoot = document.getElementById('menu-root');
   const catNavTrack = document.getElementById('cat-nav-track');
   if (menuRoot && window.AROMA_MENU) renderMenu();
 
   function renderMenu() {
-    // Category nav
+    // Category nav: segmental-arch chips with dual-script labels
     AROMA_CATEGORIES.forEach((c, i) => {
       const items = AROMA_MENU.filter(it => it.cat === c.id);
       if (!items.length) return;
       const b = document.createElement('button');
       b.className = 'cat-pill' + (i === 0 ? ' active' : '');
       b.dataset.cat = c.id;
-      b.innerHTML = `<span class="icon">${c.icon}</span><span>${c.name}</span>`;
+      b.innerHTML = `<span class="lat">${c.name}</span><span class="arr" lang="ar">${c.ar || ''}</span>`;
       b.addEventListener('click', () => {
         const t = document.getElementById('cat-' + c.id);
         if (t) {
-          const top = t.getBoundingClientRect().top + window.scrollY - 140;
+          const top = t.getBoundingClientRect().top + window.scrollY - 128;
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
       catNavTrack.appendChild(b);
     });
 
-    // Sections
+    // Sections with dual-script headers
     AROMA_CATEGORIES.forEach(cat => {
       const items = AROMA_MENU.filter(i => i.cat === cat.id);
       if (!items.length) return;
@@ -144,20 +195,17 @@
       sec.id = 'cat-' + cat.id;
       sec.innerHTML = `
         <div class="cat-head">
-          <div>
-            <span class="count">${items.length} items</span>
-            <h2>${cat.name}</h2>
-          </div>
-          <p class="blurb">${cat.blurb}</p>
+          <h2 class="h-2">${cat.name} <span class="ar" lang="ar">· ${cat.ar || ''}</span></h2>
+          <p class="blurb">${cat.blurb} · ${items.length} items</p>
         </div>
         <div class="menu-grid"></div>
       `;
       const grid = sec.querySelector('.menu-grid');
-      items.forEach(item => grid.appendChild(menuRowEl(item)));
+      items.forEach((item, idx) => grid.appendChild(menuRowEl(item, idx)));
       menuRoot.appendChild(sec);
     });
 
-    // Scroll-spy active pill
+    // Scroll-spy
     const sections = document.querySelectorAll('.cat-section');
     const pills = document.querySelectorAll('.cat-pill');
     const spy = new IntersectionObserver(es => {
@@ -169,8 +217,24 @@
           if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         }
       });
-    }, { rootMargin: '-140px 0px -60% 0px' });
+    }, { rootMargin: '-130px 0px -62% 0px' });
     sections.forEach(s => spy.observe(s));
+
+    // Leader draw-in: rows typeset themselves on first viewport entry
+    const rows = document.querySelectorAll('.menu-row');
+    const rowObs = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          rowObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4, rootMargin: '0px 0px -40px 0px' });
+    rows.forEach((r, i) => {
+      const leader = r.querySelector('.leader');
+      if (leader) leader.style.transitionDelay = `${(i % 12) * 40}ms`;
+      rowObs.observe(r);
+    });
 
     syncAddButtons();
   }
@@ -185,41 +249,54 @@
 
     row.innerHTML = `
       ${item.img ? `<div class="thumb"><img src="assets/img/${item.img}.jpg" alt="${item.name}" loading="lazy" onerror="this.parentElement.style.display='none'" /></div>` : ''}
-      <div>
-        <div class="menu-row-name">
-          ${item.popular ? '<span class="pop-dot" title="Most loved"></span>' : ''}
-          <span>${item.name}</span>
-          ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
+      <div class="menu-row-main">
+        <div class="menu-row-line">
+          <span class="menu-row-name">
+            ${item.popular ? '<span class="pop-dot" title="Most loved"></span>' : ''}
+            <span>${item.name}</span>
+            ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
+          </span>
+          <span class="leader" aria-hidden="true"></span>
+          <span class="menu-row-price">$${item.price.toFixed(2)}</span>
         </div>
         <div class="menu-row-desc">${item.desc}</div>
         ${item.calories ? `<div class="menu-row-cal">${item.calories} cal</div>` : ''}
       </div>
-      <div class="menu-row-price">$${item.price.toFixed(2)}</div>
-      <button class="menu-add" data-add type="button" aria-label="${hasMods ? 'Customize and add ' : 'Add '}${item.name}"><span class="ic">+</span></button>
+      <button class="menu-add" data-add type="button" aria-label="Add ${item.name} to bag"><span class="ic">+</span></button>
     `;
 
     const btn = row.querySelector('[data-add]');
+
+    // The + instant-adds with defaults; the row opens customization (when it exists)
     btn.addEventListener('click', e => {
       e.stopPropagation();
+      Cart.add(item, defaultSelections(item), 1);
+      flashAdded(btn);
+      flyDot(btn);
+      bumpFab();
+      showToast(`${item.name} · added`);
+    });
+    row.addEventListener('click', e => {
+      if (e.target.closest('[data-add]')) return;
       if (hasMods) openCustomize(item);
-      else { Cart.add(item, {}, 1); flashAdded(btn); bumpFab(); }
+      else {
+        Cart.add(item, {}, 1);
+        flashAdded(btn);
+        flyDot(btn);
+        bumpFab();
+        showToast(`${item.name} · added`);
+      }
     });
 
     return row;
   }
 
-  function flashAdded(btn) {
-    btn.classList.add('added');
-    const ic = btn.querySelector('.ic');
-    if (ic) ic.textContent = '✓';
-    setTimeout(() => { btn.classList.remove('added'); if (ic) ic.textContent = '+'; }, 900);
-  }
-
   function syncAddButtons() {
-    document.querySelectorAll('.menu-row').forEach(row => {
-      const id = row.dataset.id;
-      const btn = row.querySelector('[data-add]');
+    document.querySelectorAll('.menu-row, .carte-row').forEach(row => {
+      const btn = row.querySelector('[data-add], [data-quick-add]');
       if (!btn) return;
+      const id = row.dataset.id || btn.dataset.quickAdd;
+      if (!id) return;
       const n = Cart.countOf(id);
       if (n > 0) {
         btn.classList.add('has-count');
@@ -232,6 +309,7 @@
     });
   }
   document.addEventListener('cart:change', syncAddButtons);
+  syncAddButtons();
 
   /* ----------------------------------------------------------------------
      CUSTOMIZE SHEET
@@ -240,20 +318,29 @@
   const csSheet   = document.getElementById('customize-sheet');
   const csClose   = document.getElementById('cs-close');
 
-  let csCurrent = null; // { item, selections, qty }
+  let csCurrent = null;
+  let csReturnFocus = null;
 
   function openCustomize(item) {
+    if (!csSheet) return;
     csCurrent = { item, selections: defaultSelections(item), qty: 1 };
+    csReturnFocus = document.activeElement;
     renderCustomize();
     csSheet.classList.add('open');
+    csSheet.setAttribute('aria-hidden', 'false');
     csOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    csClose?.focus();
   }
   function closeCustomize() {
-    csSheet?.classList.remove('open');
+    if (!csSheet?.classList.contains('open')) { csCurrent = null; return; }
+    csSheet.classList.remove('open');
+    csSheet.setAttribute('aria-hidden', 'true');
     if (!document.getElementById('cart-drawer')?.classList.contains('open')) csOverlay?.classList.remove('open');
     csCurrent = null;
     document.body.style.overflow = '';
+    if (csReturnFocus && csReturnFocus.focus) csReturnFocus.focus();
+    csReturnFocus = null;
   }
 
   function renderCustomize() {
@@ -263,7 +350,7 @@
       ? `<div class="cs-hero"><img src="assets/img/${item.img}.jpg" alt="${item.name}" onerror="this.parentElement.style.display='none'" /></div>`
       : '';
     const upsell = (item.customizations || []).some(g => g.upsell)
-      ? `<div class="cs-upsell"><strong>Upgrade</strong>Most guests add a house syrup — Rose, Cardamom, or Pistachio.</div>`
+      ? `<div class="cs-upsell"><strong>The kitchen suggests</strong>A house syrup — Rose, Cardamom, or Pistachio, made every Tuesday.</div>`
       : '';
 
     const groups = (item.customizations || []).map(g => {
@@ -299,9 +386,9 @@
       <p class="cs-desc">${item.desc}</p>
       ${upsell}
       ${groups}
+      <span class="concierge">Ready in about eight minutes</span>
     `;
 
-    // Bind chip clicks
     body.querySelectorAll('.mod-opt').forEach(btn => {
       btn.addEventListener('click', () => {
         const gId = btn.dataset.g;
@@ -317,7 +404,6 @@
       });
     });
 
-    // Footer (qty + add)
     const foot = document.getElementById('cs-foot');
     const total = priceFor(item, selections) * qty;
     foot.innerHTML = `
@@ -338,8 +424,9 @@
       csCurrent.qty = Math.max(1, csCurrent.qty + (+b.dataset.qty));
       renderCustomize();
     }));
-    foot.querySelector('#cs-add').addEventListener('click', () => {
+    foot.querySelector('#cs-add').addEventListener('click', e => {
       Cart.add(item, selections, qty);
+      flyDot(e.currentTarget);
       bumpFab();
       showToast(`${item.name} · added`);
       closeCustomize();
@@ -363,25 +450,43 @@
 
   function bumpFab() {
     if (!fab) return;
+    fab.classList.remove('hidden-down');
     fab.classList.add('bump');
     setTimeout(() => fab.classList.remove('bump'), 500);
   }
+  let drawerReturnFocus = null;
   function openCartDrawer() {
     renderCartDrawer();
+    drawerReturnFocus = document.activeElement;
     drawer?.classList.add('open');
+    drawer?.setAttribute('aria-hidden', 'false');
     csOverlay?.classList.add('open');
     document.body.style.overflow = 'hidden';
+    cartClose?.focus();
   }
   function closeCartDrawer() {
-    drawer?.classList.remove('open');
+    if (!drawer?.classList.contains('open')) return;
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
     if (!csSheet?.classList.contains('open')) csOverlay?.classList.remove('open');
     document.body.style.overflow = '';
+    if (drawerReturnFocus && drawerReturnFocus.focus) drawerReturnFocus.focus();
+    drawerReturnFocus = null;
   }
   fab?.addEventListener('click', openCartDrawer);
   cartClose?.addEventListener('click', closeCartDrawer);
   csOverlay?.addEventListener('click', () => { closeCustomize(); closeCartDrawer(); });
-  document.querySelector('#cart-open-nav')?.addEventListener('click', e => { e.preventDefault(); openCartDrawer(); });
   document.querySelectorAll('[data-open-cart]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); openCartDrawer(); }));
+
+  /* Cart-pill etiquette: hide on scroll-down past 600px, return on scroll-up */
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    if (!fab || !fab.classList.contains('visible')) { lastY = window.scrollY; return; }
+    const y = window.scrollY;
+    if (y > 600 && y > lastY + 6) fab.classList.add('hidden-down');
+    else if (y < lastY - 6) fab.classList.remove('hidden-down');
+    lastY = y;
+  }, { passive: true });
 
   function renderCartDrawer() {
     const state = Cart.read();
@@ -389,9 +494,9 @@
     if (state.items.length === 0) {
       drawerBody.innerHTML = `
         <div class="cart-empty">
-          <div class="display">∅</div>
-          <p style="font-family: var(--font-display); font-style: italic; font-size: 1.25rem; color: var(--ink); margin-bottom: 0.5rem;">Your bag is empty</p>
-          <p>Tap any <strong style="color:var(--bronze-deep)">+</strong> on the menu to add an item.</p>
+          <div class="display">✦</div>
+          <p style="font-weight: 600; color: var(--ink); margin-bottom: 0.5rem;">Your bag is empty</p>
+          <p>Tap any <strong style="color: var(--palm);">+</strong> on the menu to add an item.</p>
         </div>
       `;
       if (cartFooter) cartFooter.style.display = 'none';
@@ -455,7 +560,7 @@
     toast.querySelector('.text').textContent = text;
     toast.classList.add('visible');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('visible'), 2400);
+    toastTimer = setTimeout(() => toast.classList.remove('visible'), 2200);
   }
 
 })();
